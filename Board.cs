@@ -69,7 +69,7 @@ namespace Console_Chess
             }
         }
 
-        public Piece GetPosition(Position pos)
+        public Piece GetPositionPiece(Position pos)
         {
             return Pieces[pos.GetRow(),pos.GetColumn()];
         }

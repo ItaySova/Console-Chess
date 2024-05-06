@@ -9,12 +9,22 @@ namespace Console_Chess
             // tests
             if (args.Length != 0)
             {
-                InputTests.TestUserInputs();
+                if (args[0] == "input")
+                {
+                    InputTests.TestUserInputs();
 
-                Console.WriteLine("press enter for next tests (UserInputtest):");
-                Console.ReadLine();
-                UserInputTest t2 = new UserInputTest();
-                t2.Play();
+                    Console.WriteLine("press enter for next tests (UserInputtest):");
+                    Console.ReadLine();
+                    UserInputTest t2 = new UserInputTest();
+                    t2.Play();
+                } else if (args[0] == "board")
+                {
+                    //BoardTests.GetPositionTest();
+                    Console.WriteLine("Board test!");
+                    BoardTests tb1 = new BoardTests();
+                    tb1.Play();
+                }
+                
             } else
             {
                 ChessGame game = new ChessGame();

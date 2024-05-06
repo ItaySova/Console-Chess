@@ -56,7 +56,7 @@ namespace Console_Chess
                     // if the input is valid - convert to move and proceed
                     PlayerMove = ConvertInputToMove(input);
                     Position FromPos = PlayerMove.GetFromPos();
-                    Piece Chosen = board.GetPosition(FromPos);
+                    Piece Chosen = board.GetPositionPiece(FromPos);
                     // validation for choosing a piece which belong to turns player and not an empty square
                     isValid = Chosen != null && IsPieceBelongToPlayer(Chosen);
                     // add validation for the move itself - such as if the move is legal for the piece or if it leaves the player in check
@@ -112,6 +112,21 @@ namespace Console_Chess
         public bool GetTurnPlayer()
         {
             return TurnPlayer;
+        }
+
+        public bool GetIsGameOver()
+        {
+            return IsGameOver;
+        }
+
+        public Board GetBoard()
+        {
+            return board;
+        }
+
+        public void SetTurnPlayer(bool turnPlayer)
+        {
+            this.TurnPlayer = turnPlayer;
         }
     }
 }
