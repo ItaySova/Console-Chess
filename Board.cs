@@ -73,5 +73,23 @@ namespace Console_Chess
         {
             return Pieces[pos.GetRow(),pos.GetColumn()];
         }
+
+        public static bool IsPositionInBoard(Position pos)
+        {
+            return (pos.GetRow() >= 0 &&
+                pos.GetColumn() >= 0 &&
+                pos.GetRow() <=7 &&
+                pos.GetColumn() <=7);
+        }
+
+        public Piece RemovePiece(Position pos)
+        {
+            Piece pieceToRemove = Pieces[pos.GetRow(), pos.GetColumn()];
+            if (pieceToRemove != null)
+            {
+                Pieces[pos.GetRow(), pos.GetColumn()] = null;
+            }
+            return pieceToRemove;
+        }
     }
 }

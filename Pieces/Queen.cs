@@ -9,6 +9,11 @@ namespace Console_Chess.Pieces
     internal class Queen:Piece
     {
         public Queen(bool player, Position pos) :base(player, pos) { }
+
+        public override string GetMoves(Board board)
+        {
+            return base.GetMoves(board);
+        }
         public override string ToString()
         {
             return base.ToString() + "q";

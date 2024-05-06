@@ -10,6 +10,11 @@ namespace Console_Chess.Pieces
     {
         public Bishop(bool player, Position pos) :base(player,pos) { }
 
+        public override string GetMoves(Board board)
+        {
+            return base.GetMoves(board);
+        }
+
         public override string ToString()
         {
             return base.ToString() + "b";

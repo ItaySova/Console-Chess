@@ -9,7 +9,7 @@ namespace Console_Chess.Pieces
     internal class Piece
     {
         protected bool IsWhite;
-        bool HasMoved;
+        protected bool HasMoved;
         protected Position PiecePosition;
         public Piece(bool player,Position pos) 
         {
@@ -26,6 +26,11 @@ namespace Console_Chess.Pieces
         public bool GetHasMoved()
         {
             return HasMoved;
+        }
+
+        public virtual string GetMoves(Board board)
+        {
+            return "implementation from base class";
         }
         public override string ToString()
         {
