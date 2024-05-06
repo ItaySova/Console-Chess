@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Console_Chess.Pieces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,16 +24,14 @@ namespace Console_Chess
 
         public virtual void Play() // virtual for tests
         {
-            while (IsGameOver)
+            while (!IsGameOver)
             {
                 // printing
                 board.Print();
 
                 // taking user input
                 Move playerMove = UserInput();
-
-                //converting the input string to Move: (after validations for the input itself
-                
+                Console.WriteLine(playerMove.ToString());
 
                 // testing the input for valid input - rulewise
 
@@ -54,8 +53,12 @@ namespace Console_Chess
                 input = Console.ReadLine();
                 if(ValidateInput(input))
                 {
-                    isValid = true; // if the input is valid - convert to move and then check from Move class if it is legal
+                    // if the input is valid - convert to move and proceed
                     PlayerMove = ConvertInputToMove(input);
+                    Position FromPos = PlayerMove.GetFromPos();
+                    Piece Chosen = board.GetPosition(FromPos);
+                    // validation for choosing a piece which belong to turns player and not an empty square
+                    isValid = Chosen != null && IsPieceBelongToPlayer(Chosen);
                     // add validation for the move itself - such as if the move is legal for the piece or if it leaves the player in check
                 }
                 // massage for invalid move - 
@@ -100,6 +103,11 @@ namespace Console_Chess
             return new Move(fromPos, toPose);
         }
 
+        public bool IsPieceBelongToPlayer(Piece piece)
+        {
+            bool isPieceBelongToPlayer = piece.GetPlayer() == TurnPlayer;
+            return isPieceBelongToPlayer;
+        }
         // getters:
         public bool GetTurnPlayer()
         {
