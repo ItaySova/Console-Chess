@@ -22,6 +22,11 @@ namespace Console_Chess.Pieces
         {
             return IsWhite;
         }
+
+        public bool GetHasMoved()
+        {
+            return HasMoved;
+        }
         public override string ToString()
         {
             return IsWhite ? "w" : "b";
