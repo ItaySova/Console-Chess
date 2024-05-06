@@ -18,6 +18,8 @@ namespace Console_Chess
             this.Column = column;
         }
 
+        public int GetRow() { return Row; }
+        public int GetColumn() { return Column; }
         public override string ToString()
         {
             //  hgfedcba

@@ -17,6 +17,12 @@ namespace Console_Chess
             ToPosition = toPosition;
         }
 
+        public Position GetFromPos()
+        {
+            return FromPosition;
+        }
+
+        public Position GetToPosition() { return ToPosition; }
         public override string ToString()
         {
             return FromPosition.ToString() + ToPosition.ToString();
