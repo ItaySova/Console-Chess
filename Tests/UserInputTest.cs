@@ -20,10 +20,16 @@ namespace Console_Chess.Tests
                 moves[i] = UserInput(inputsForUserInputFunction,inputCounter);
             }
             Console.WriteLine();
-            for (int i = 0;i < 6; i++)
+            string MoveList = "";
+            for (int i = 0;i < moves.Length; i++)
             {
-                Console.WriteLine(moves[i]);
+                if (moves[i] != null)
+                {
+                    MoveList += moves[i] + ",";
+                }
             }
+            Console.WriteLine("the following list of moves: \n" +
+                "a1a2,b1b2,bbbb,A1a2,'',H1H2,a8a7,h8h7\nyielded the following moves:\n" +MoveList);
         }
 
         public Move UserInput(string[] TestInputs, int inputCounter)
@@ -38,12 +44,12 @@ namespace Console_Chess.Tests
             Move PlayerMove = null;
             while (!isValid)
             {
-                Console.WriteLine("what will be your move, " + (GetTurnPlayer() ? "white" : "black"));
+                /*Console.WriteLine("what will be your move, " + (GetTurnPlayer() ? "white" : "black"));
                 if (counter != 4 && TestInputs[counter] == "")
                 {
                     //
                     Console.WriteLine("testing input #" +  counter);
-                }
+                }*/
                 if (ValidateInput(TestInputs[counter]))
                 {
                     isValid = true; // if the input is valid - convert to move and then check from Move class if it is legal

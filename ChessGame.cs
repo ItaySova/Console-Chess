@@ -65,7 +65,7 @@ namespace Console_Chess
             return PlayerMove;
         }
 
-        public bool ValidateInput(string input) // validate that the input itself is valid
+        public bool ValidateInput(string input) // validate that the input itself is valid in regard to form (a-Z,1-8,a-Z,1-8)
         {
             // valid move input is A2A3 - 4 chars when 1,3 positions are numbers and 0,2 are letters
             if (input == null || input.Length != 4)
