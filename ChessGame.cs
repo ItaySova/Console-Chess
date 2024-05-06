@@ -11,40 +11,58 @@ namespace Console_Chess
         Board board;
         bool TurnPlayer;
         bool IsGameOver;
+        int TurnCount;
         public ChessGame()
         {
             board = new Board();
             board.InitBoard();
             TurnPlayer = true;
             IsGameOver = false;
+            TurnCount = 0;
         }
 
-        public void Play()
+        public virtual void Play() // virtual for tests
         {
-            // printing
-            board.Print();
+            while (IsGameOver)
+            {
+                // printing
+                board.Print();
 
-            // taking user input
-            string input = UserInput();
+                // taking user input
+                Move playerMove = UserInput();
 
-            // testing the input for valid input
+                //converting the input string to Move: (after validations for the input itself
+                
 
-            // executing the input
+                // testing the input for valid input - rulewise
+
+                // executing the input
+
+                // change the turn player and incrementing turn count:
+                TurnPlayer = !TurnPlayer;
+                TurnCount++;
+            }
         }
-        public string UserInput()
+        public virtual Move UserInput() // virtual for tests
         {
             bool isValid = false;
             string input = "";
+            Move PlayerMove = null;
             while (!isValid)
             {
                 Console.WriteLine("what will be your move, " + (TurnPlayer?"white":"black"));
                 input = Console.ReadLine();
                 if(ValidateInput(input))
                 {
-                    isValid = true;
+                    isValid = true; // if the input is valid - convert to move and then check from Move class if it is legal
+                    PlayerMove = ConvertInputToMove(input);
+                    // add validation for the move itself - such as if the move is legal for the piece or if it leaves the player in check
                 }
+                // massage for invalid move - 
+                if(!isValid)
+                    Console.WriteLine("that was an invalid move - try again:");
             }
-            return input;
+            return PlayerMove;
         }
 
         public bool ValidateInput(string input) // validate that the input itself is valid
@@ -60,6 +78,32 @@ namespace Console_Chess
             bool CharsValid = ValidChars.Contains(input[0] + "") && ValidChars.Contains(input[2] + "");
             bool NumbersValid = ValidNumbers.Contains(input[1] + "") && ValidNumbers.Contains(input[3] + "");
             return CharsValid && NumbersValid;
+        }
+
+        public Position ConvertInputToPosition(char letter, char number)
+        {
+            // the input already passed validation - letter will be column and number will be row
+            string lettersDict = "abcdefgh";
+            string numbersDict = "87654321";
+            int col = lettersDict.IndexOf((letter+ "").ToLower());
+            int row = numbersDict.IndexOf(number);
+
+            Position pos = new Position(row, col);
+            return pos;
+        }
+
+        public Move ConvertInputToMove(string input)
+        {
+            Position fromPos = ConvertInputToPosition(input[0], input[1]);
+            Position toPose = ConvertInputToPosition(input[2], input[3]);
+
+            return new Move(fromPos, toPose);
+        }
+
+        // getters:
+        public bool GetTurnPlayer()
+        {
+            return TurnPlayer;
         }
     }
 }
