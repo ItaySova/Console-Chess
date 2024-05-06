@@ -43,6 +43,7 @@ namespace Console_Chess.Tests
                 Piece Chosen = testBoard.GetPositionPiece(playerMove.GetFromPos());
                 Console.WriteLine("move is : "+ playerMove.ToString()+ "\n" +
                     "piece chosen: "+ Chosen);
+                testBoard.RemovePiece(playerMove.GetFromPos());
 
                 // testing the input for valid input - rulewise
 
