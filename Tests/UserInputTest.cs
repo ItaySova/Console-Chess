@@ -12,12 +12,10 @@ namespace Console_Chess.Tests
         {
             string[] inputsForUserInputFunction = new string[] { "a1a2", "b1b2", "bbbb", "A1a2", "", "H1H2", "a8a7", "h8h7" };
             Move[] moves = new Move[10];
-            int inputCounter = 0;
-            //int currentIndex = 0;
 
             for (int i = 0; i < 6; i++)
             {
-                moves[i] = UserInput(inputsForUserInputFunction,inputCounter);
+                moves[i] = UserTextToMoveInput(inputsForUserInputFunction);
             }
             Console.WriteLine();
             string MoveList = "";
@@ -32,24 +30,14 @@ namespace Console_Chess.Tests
                 "a1a2,b1b2,bbbb,A1a2,'',H1H2,a8a7,h8h7\nyielded the following moves:\n" +MoveList);
         }
 
-        public Move UserInput(string[] TestInputs, int inputCounter)
-        {
-            // test for getting counter higher than the length of inputs
-            if(inputCounter == TestInputs.Length)
-            {
-                return null;
-            }
+        // uset input
+        public Move UserTextToMoveInput(string[] TestInputs)
+        {            
             bool isValid = false;
             int counter = 0;
             Move PlayerMove = null;
             while (!isValid)
             {
-                /*Console.WriteLine("what will be your move, " + (GetTurnPlayer() ? "white" : "black"));
-                if (counter != 4 && TestInputs[counter] == "")
-                {
-                    //
-                    Console.WriteLine("testing input #" +  counter);
-                }*/
                 if (ValidateInput(TestInputs[counter]))
                 {
                     isValid = true; // if the input is valid - convert to move and then check from Move class if it is legal
