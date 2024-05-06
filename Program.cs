@@ -1,12 +1,16 @@
-﻿namespace Console_Chess
+﻿using Console_Chess.Tests;
+
+namespace Console_Chess
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Board board = new Board();
-            board.InitBoard();
-            board.Print();
+            // tests
+            InputTests.TestUserInputs(); 
+
+            //ChessGame game = new ChessGame();
+            //game.Play();
         }
     }
 }
