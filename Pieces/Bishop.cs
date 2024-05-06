@@ -8,7 +8,7 @@ namespace Console_Chess.Pieces
 {
     internal class Bishop:Piece
     {
-        public Bishop(bool player):base(player) { }
+        public Bishop(bool player, Position pos) :base(player,pos) { }
 
         public override string ToString()
         {

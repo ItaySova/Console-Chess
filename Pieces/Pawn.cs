@@ -8,7 +8,7 @@ namespace Console_Chess.Pieces
 {
     internal class Pawn:Piece
     {
-        public Pawn(bool player):base(player) { }
+        public Pawn(bool player, Position pos):base(player, pos) { }
 
         public override string ToString()
         {

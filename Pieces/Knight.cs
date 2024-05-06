@@ -8,7 +8,7 @@ namespace Console_Chess.Pieces
 {
     internal class Knight :Piece
     {
-        public Knight(bool player) : base(player) { }
+        public Knight(bool player, Position pos) : base(player, pos) { }
         public override string ToString()
         {
             return base.ToString() + "n";

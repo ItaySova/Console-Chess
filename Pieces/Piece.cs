@@ -8,12 +8,20 @@ namespace Console_Chess.Pieces
 {
     internal class Piece
     {
-        public bool IsWhite;
-        public Piece(bool player) 
+        protected bool IsWhite;
+        bool HasMoved;
+        protected Position PiecePosition;
+        public Piece(bool player,Position pos) 
         {
-            IsWhite = player;        
+            IsWhite = player;
+            HasMoved = false;
+            PiecePosition = pos;
         }
 
+        public bool GetPlayer()
+        {
+            return IsWhite;
+        }
         public override string ToString()
         {
             return IsWhite ? "w" : "b";
