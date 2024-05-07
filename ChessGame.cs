@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -43,7 +44,12 @@ namespace Console_Chess
                 Console.WriteLine(playerMove.ToString());
 
                 // testing the input for valid input - rulewise
-
+                bool isMoveValid = IsMoveInAllPlayerMoves(playerMove);
+                if (!isMoveValid)
+                {
+                    Console.WriteLine("move is not in all moves list - try again");
+                    continue;
+                }
                 // executing the input
 
                 // change the turn player and incrementing turn count:
@@ -74,7 +80,7 @@ namespace Console_Chess
                 }
                 // massage for invalid move - 
                 if(!isValid)
-                    Console.WriteLine("that was an invalid move - try again:");
+                    Console.WriteLine("failed input validation check - either the from spot is empty or contains enemt piece:");
             }
             return PlayerMove;
         }
@@ -118,6 +124,23 @@ namespace Console_Chess
         {
             bool isPieceBelongToPlayer = piece.GetPlayer() == TurnPlayer;
             return isPieceBelongToPlayer;
+        }
+
+        public bool IsMoveInAllPlayerMoves(Move move)
+        {
+            // helpers - get all pieces for player
+            Piece[] allPlayerPieces = board.GetAllPiecesForPlayer(TurnPlayer);
+            // get moves for all pieces
+            string allPossibleMoves = board.GetAllMovesForPieces(allPlayerPieces);
+            string[] movesArr = allPossibleMoves.Split(',');
+            // then check if the move in list
+            return Array.IndexOf(movesArr, move.ToString()) != -1;
+            //return true;
+        }
+
+        public virtual void GameSimulation(string[] inputs)
+        {
+            Console.WriteLine("virtual function for tests classes");
         }
         // getters:
         public bool GetTurnPlayer()
