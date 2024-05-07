@@ -73,10 +73,13 @@ namespace Console_Chess
         public void Print(string moves)
         { //|br||bn||bb||bq||bk||bb||bn||br|
             // converting the string of moves to an array of to positions
-            string[] movesArr = moves.Split(',');
+            string[] movesArr = moves.Split(',');            
             for (int i = 0; i < movesArr.Length; i++)
             {
-                movesArr[i] = movesArr[i].Substring(2);
+                if (movesArr[i] != "")
+                {
+                    movesArr[i] = movesArr[i].Substring(2);
+                }
             }
             // check in the loop if the position given is equal to the [r,c]
             Position currentPos;
@@ -90,6 +93,11 @@ namespace Console_Chess
                     int IndexPosInArr = Array.IndexOf(movesArr, currentPos.ToString());
                     if (Pieces[row, col] != null)
                     {
+                        if ((IndexPosInArr != -1))
+                        {
+                            Console.Write("(" + Pieces[row, col] + ")");
+                            continue;
+                        }
                         Console.Write("|" + Pieces[row, col] + "|");
                     }
                     else if(IndexPosInArr != -1)
