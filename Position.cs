@@ -41,5 +41,20 @@ namespace Console_Chess
             char number = numbersDict[Row];
             return "" + letter + number;
         }
+
+        public static bool ISStringPosEqualToPos(string str, Position pos)
+        {
+            if(str.Length != 2)
+            {
+                return false;
+            }
+            // copy from convert input to position
+            string lettersDict = "abcdefgh";
+            string numbersDict = "87654321";
+            int col = lettersDict.IndexOf((str[0] + "").ToLower());
+            int row = numbersDict.IndexOf(str[1]);
+
+            return row == pos.Row && col == pos.Column;
+        }
     }
 }
