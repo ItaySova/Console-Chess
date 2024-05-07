@@ -20,6 +20,18 @@ namespace Console_Chess
 
         public int GetRow() { return Row; }
         public int GetColumn() { return Column; }
+
+        public int[] GetCoordinates()
+        {
+            return new[] { Row, Column };
+        }
+
+        public override bool Equals(object? obj)
+        {
+            Position other = obj as Position;
+            if (other == null) return false;
+            return this.Row == other.Row && this.Column == other.Column;
+        }
         public override string ToString()
         {
             //  hgfedcba
