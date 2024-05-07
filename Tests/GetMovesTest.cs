@@ -61,6 +61,9 @@ namespace Console_Chess.Tests
             Board testBoard = GetBoard();
             bool Player = GetTurnPlayer();
             bool gameOver = false;
+            string CurrentPieceMoves = "";
+            int XCoord = 99;
+            int YCoord = 99;
             while (!gameOver)
             {
                 // printing
@@ -71,8 +74,17 @@ namespace Console_Chess.Tests
                 Piece Chosen = testBoard.GetPositionPiece(playerMove.GetFromPos());
                 Console.WriteLine("move is : " + playerMove.ToString() + "\n" +
                     "piece chosen: " + Chosen);
-                testBoard.RemovePiece(playerMove.GetFromPos());
+                //testBoard.RemovePiece(playerMove.GetFromPos()); // - later for moving
+                CurrentPieceMoves = Chosen.GetMoves(testBoard);
+                int[] coords = playerMove.GetFromPos().GetCoordinates();
+                Console.WriteLine("player " + (Player ? "white" : "black") + " moves for chosen piece at:" + playerMove.GetFromPos() + " or " +
+                    coords[0] +", " + coords[1] + " is: " + CurrentPieceMoves);
 
+                // print the board with the position available for chosen piece:
+
+
+                Console.WriteLine("press enter to continue to new turn:");
+                Console.ReadLine();
                 // testing the input for valid input - rulewise
 
                 // executing the input
