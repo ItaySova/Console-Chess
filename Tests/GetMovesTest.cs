@@ -99,6 +99,18 @@ namespace Console_Chess.Tests
         public static void GetMovesTestRook()
         {
             Board board = new Board();
+            Piece whiteRook = new Rook(true, new Position(7, 7));
+            Piece WhiteInMiddleBoard = new Rook(true, new Position(4, 3));
+            Piece blackRook = new Rook(false, new Position(0, 0));
+            Piece blackRookOnWhitePath = new Rook(false, new Position(1, 7));
+            Piece whitePawn = new Pawn(true, new Position(7,1));
+            board.AddPiece(whiteRook);
+            board.AddPiece(WhiteInMiddleBoard);
+            board.AddPiece(blackRook);
+            board.AddPiece(blackRookOnWhitePath);
+            board.AddPiece(whitePawn);
+            ChessGame testGame = new GetMovesTest(board);
+            testGame.Play();
         }
 
         public static void GetMovesTestKnight()
