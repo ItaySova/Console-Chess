@@ -25,6 +25,10 @@ namespace Console_Chess.Pieces
         public override string GetMoves(Board board)
         {
             string MoveList = "";
+            for (int i = 0;i< directions.Length; i++)
+            {
+                MoveList += GetMovesInDir(board, directions[i]) + ",";
+            }
             return MoveList;
         }
         public override string ToString()
