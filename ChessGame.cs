@@ -53,6 +53,7 @@ namespace Console_Chess
                 // add validation that the move doesnt leave a player in check
 
                 // executing the input
+                ExecuteMove(playerMove);
 
                 // change the turn player and incrementing turn count:
                 TurnPlayer = !TurnPlayer;
@@ -141,6 +142,11 @@ namespace Console_Chess
         {
             Console.WriteLine("virtual function for tests classes");
         }
+
+        public bool isPlayerInCheck()
+        {
+            return false;
+        }
         // getters:
         public bool GetTurnPlayer()
         {
@@ -167,6 +173,7 @@ namespace Console_Chess
             Piece pieceCopy = board.RemovePiece(move.GetFromPos());
             Piece ToPosCopy = board.RemovePiece(move.GetToPosition());
             pieceCopy.SetPiecePosition(move.GetToPosition());
+            pieceCopy.SetHasMoved(true);
             
             return board.AddPiece(pieceCopy); // change later to reset 50 move rule
 
