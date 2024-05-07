@@ -68,6 +68,43 @@ namespace Console_Chess
                 Console.WriteLine();
             }
         }
+        // override print with string of moves.
+
+        public void Print(string moves)
+        { //|br||bn||bb||bq||bk||bb||bn||br|
+            // converting the string of moves to an array of to positions
+            string[] movesArr = moves.Split(',');
+            for (int i = 0; i < movesArr.Length; i++)
+            {
+                movesArr[i] = movesArr[i].Substring(2);
+            }
+            // check in the loop if the position given is equal to the [r,c]
+            Position currentPos;
+            Console.WriteLine("  | a|| b|| c|| d|| e|| f|| g|| h|");
+            for (int row = 0; row < 8; row++)
+            {
+                Console.Write(8 - row + " ");
+                for (int col = 0; col < 8; col++)
+                {
+                    currentPos = new Position(row, col); // to check if it appears in the moves Arr
+                    int IndexPosInArr = Array.IndexOf(movesArr, currentPos.ToString());
+                    if (Pieces[row, col] != null)
+                    {
+                        Console.Write("|" + Pieces[row, col] + "|");
+                    }
+                    else if(IndexPosInArr != -1)
+                    {
+                        Console.Write("|^^|");
+                    }
+                    else
+                    {
+                        Console.Write("|  |");
+                    }
+                }
+                Console.WriteLine();
+            }
+        }
+
 
         public Piece GetPositionPiece(Position pos)
         {
