@@ -145,6 +145,18 @@ namespace Console_Chess
 
         public bool isPlayerInCheck()
         {
+            // get all opponent pieces
+            Piece[] allOpponentPieces = board.GetAllPiecesForPlayer(!TurnPlayer);
+            // get the current player king for its stored position 
+            Piece currentPlayerKing = board.FindPlayerKing(TurnPlayer);
+            // check for every enemy piece if at least one can capture the current king
+            foreach (Piece piece in allOpponentPieces)
+            {
+                if (piece.CanCaptureKing(board, currentPlayerKing))
+                {
+                    return true;
+                }
+            }
             return false;
         }
         // getters:
