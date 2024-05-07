@@ -62,8 +62,6 @@ namespace Console_Chess.Tests
             bool Player = GetTurnPlayer();
             bool gameOver = false;
             string CurrentPieceMoves = "";
-            int XCoord = 99;
-            int YCoord = 99;
             while (!gameOver)
             {
                 // printing
@@ -81,10 +79,11 @@ namespace Console_Chess.Tests
                     coords[0] +", " + coords[1] + " is: " + CurrentPieceMoves);
 
                 // print the board with the position available for chosen piece:
-
+                testBoard.Print(CurrentPieceMoves);
 
                 Console.WriteLine("press enter to continue to new turn:");
                 Console.ReadLine();
+                Console.Clear();
                 // testing the input for valid input - rulewise
 
                 // executing the input
