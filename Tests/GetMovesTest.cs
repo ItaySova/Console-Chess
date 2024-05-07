@@ -65,27 +65,45 @@ namespace Console_Chess.Tests
 
         public static void GetMovesTestking()
         {
-            //
+            Board board = new Board();
+            Piece BlackKing = new King(false, new Position(0, 4));
+            Piece whiteKing = new King(true, new Position(7, 4));
+            Piece WhiteNearBlackKing = new Pawn(true , new Position(1, 3));
+            Piece whiteNearWhiteKing = new Pawn(true, new Position(6, 3));
+            Piece blackNearBlackKing = new Pawn(false, new Position(1, 5));
+            Piece blackNearWhiteKing = new Pawn(false, new Position(6, 5));
+            Piece WhiteKingNoSorround = new King(true , new Position(4, 2));
+            board.AddPiece(BlackKing);
+            board.AddPiece(whiteKing);
+            board.AddPiece(WhiteNearBlackKing);
+            board.AddPiece(whiteNearWhiteKing);
+            board.AddPiece(blackNearBlackKing);
+            board.AddPiece(blackNearWhiteKing);
+            board.AddPiece(WhiteKingNoSorround);
+            board.Print();
+            ChessGame testGame = new GetMovesTest(board);
+            testGame.Play();
+
         }
 
         public static void GetMovesTestQueen()
         {
-            //
+            Board board = new Board();
         }
 
         public static void GetMovesTestBishop()
         {
-            //
+            Board board = new Board();
         }
 
         public static void GetMovesTestRook()
         {
-            //
+            Board board = new Board();
         }
 
         public static void GetMovesTestKnight()
         {
-            //
+            Board board = new Board();
         }
 
         public override void Play()

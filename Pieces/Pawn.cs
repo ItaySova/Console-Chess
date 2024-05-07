@@ -26,6 +26,7 @@ namespace Console_Chess.Pieces
             }
         }
 
+        // ad en passant and promotion
         public override string GetMoves(Board board)
         {
             string MovesList = "";
