@@ -130,6 +130,15 @@ namespace Console_Chess.Tests
         public static void GetMovesTestKnight()
         {
             Board board = new Board();
+            Piece whiteKnight = new Knight(true, new Position(3, 3));
+            Piece blackKnight = new Knight(false, new Position(1, 0));
+            Piece whitePawn = new Pawn(true, new Position(2, 2));
+            board.AddPiece(whiteKnight);
+            board.AddPiece(blackKnight);
+            board.AddPiece(whitePawn);
+
+            ChessGame testGame = new GetMovesTest(board);
+            testGame.Play();
         }
 
         public override void Play()
