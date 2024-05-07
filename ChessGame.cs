@@ -50,6 +50,8 @@ namespace Console_Chess
                     Console.WriteLine("move is not in all moves list - try again");
                     continue;
                 }
+                // add validation that the move doesnt leave a player in check
+
                 // executing the input
 
                 // change the turn player and incrementing turn count:
@@ -74,9 +76,6 @@ namespace Console_Chess
                     Piece Chosen = board.GetPositionPiece(FromPos);
                     // validation for choosing a piece which belong to turns player and not an empty square
                     isValid = Chosen != null && IsPieceBelongToPlayer(Chosen);
-                    // add validation for if the move is in piece list of moves
-
-                    // add validation that the move doesnt leave a player in check
                 }
                 // massage for invalid move - 
                 if(!isValid)
@@ -161,6 +160,16 @@ namespace Console_Chess
         public void SetTurnPlayer(bool turnPlayer)
         {
             this.TurnPlayer = turnPlayer;
+        }
+
+        public bool ExecuteMove(Move move)
+        {
+            Piece pieceCopy = board.RemovePiece(move.GetFromPos());
+            Piece ToPosCopy = board.RemovePiece(move.GetToPosition());
+            pieceCopy.SetPiecePosition(move.GetToPosition());
+            
+            return board.AddPiece(pieceCopy); // change later to reset 50 move rule
+
         }
     }
 }

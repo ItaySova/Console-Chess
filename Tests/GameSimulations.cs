@@ -16,7 +16,7 @@ namespace Console_Chess.Tests
         public static void Simulation1()
         {
             ChessGame testGame = new GameSimulations();
-            string[] inputs = { "e2e4", "e7e5", "b1c3", "b8c6" };
+            string[] inputs = { "e2e4", "f7f5", "b1c3", "b8c6" ,"d1h5","g7g6","h5f5","g6f5"};
             testGame.GameSimulation(inputs);
         }
 
@@ -35,18 +35,20 @@ namespace Console_Chess.Tests
 
                 // taking user input
                 Move playerMove = ConvertInputToMove(InputMoves[moveCounter]);
-                Console.WriteLine(playerMove.ToString());
+                Console.WriteLine(playerMove.ToString() +" by player: " + (Player?"white":"black"));
 
                 // testing the input for valid input - rulewise
                 bool isMoveValid = IsMoveInAllPlayerMoves(playerMove);
                 Console.WriteLine((isMoveValid ? "execute input:" : "invalid move"));
                 // executing the input
+                ExecuteMove(playerMove);
                 // change the turn player and incrementing turn count:
                 Console.WriteLine("press enter to continue");
                 Console.ReadLine();
                 moveCounter++;
                 if(moveCounter == InputMoves.Length)
                 {
+                    testBoard.Print();
                     Console.WriteLine("ran out of automatic inputs");
                     gameOver = true;
                 }
