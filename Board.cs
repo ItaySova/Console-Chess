@@ -197,5 +197,23 @@ namespace Console_Chess
             Pieces[targetPos.GetRow(), targetPos.GetColumn()] = piece;
             return true;
         }
+
+        public Piece FindPlayerKing(bool player)
+        {
+            for (int r=0;r <8;r++)
+            {
+                for (int c=0;c<8;c++)
+                {
+                    if (Pieces[r,c] != null)
+                    {
+                        if(Pieces[r, c] is King && Pieces[r, c].GetPlayer() == player)
+                        {
+                            return Pieces[r, c];
+                        }
+                    }
+                }
+            }
+            return null;
+        }
     }
 }
