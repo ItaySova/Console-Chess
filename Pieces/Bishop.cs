@@ -8,11 +8,24 @@ namespace Console_Chess.Pieces
 {
     internal class Bishop:Piece
     {
-        public Bishop(bool player, Position pos) :base(player,pos) { }
+        private Direction[] directions; 
+        public Bishop(bool player, Position pos) :base(player,pos) 
+        {
+            directions = new Direction[4];
+            directions[0] = Direction.NorthEast;
+            directions[1] = Direction.SouthWest;
+            directions[2] = Direction.SouthEast;
+            directions[3] = Direction.NorthWest;
+        }
 
         public override string GetMoves(Board board)
         {
-            return base.GetMoves(board);
+            string MoveList = "";
+            for(int i = 0;i < directions.Length; i++)
+            {
+                MoveList += GetMovesInDir(board, directions[i]) + ",";
+            }
+            return MoveList;
         }
 
         public override string ToString()
