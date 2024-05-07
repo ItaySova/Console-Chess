@@ -13,6 +13,9 @@ namespace Console_Chess.Tests
 
         public static void GetMovesTestPawm()
         {
+            /*list of moves for future tests: 
+             b2b3-> a3a2-> f6f7 -> e7e6 -> a8a7 -> h1h2 -> g7g8 -> g2g1
+             */
             Board board = new Board();
             Piece blackPawn = new Pawn(false, new Position(1,4));
             Piece blackNearWhitePawn = new Pawn(false, new Position(5, 0));
