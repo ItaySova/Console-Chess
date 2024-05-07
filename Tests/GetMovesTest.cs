@@ -100,6 +100,14 @@ namespace Console_Chess.Tests
         public static void GetMovesTestBishop()
         {
             Board board = new Board();
+            Piece whiteBishop = new Bishop(true, new Position(4, 3));
+            Piece blackBishop = new Bishop(false, new Position(0, 2));
+            Piece blackPawn = new Pawn(false, new Position(2, 0));
+            board.AddPiece(blackBishop);
+            board.AddPiece(whiteBishop);
+            board.AddPiece(blackPawn);
+            ChessGame testGame = new GetMovesTest(board);
+            testGame.Play();
         }
 
         public static void GetMovesTestRook()
