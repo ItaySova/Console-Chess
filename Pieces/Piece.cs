@@ -28,6 +28,18 @@ namespace Console_Chess.Pieces
             return HasMoved;
         }
 
+        public Position GetPosition()
+        {
+            return PiecePosition;
+        }
+
+        public bool SetPiecePosition(Position pos)
+        {
+            if (pos == null ) return false;
+            this.PiecePosition = pos;
+            return true;
+        }
+
         public virtual string GetMoves(Board board)
         {
             return "implementation from base class";
