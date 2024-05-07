@@ -45,8 +45,25 @@ namespace Console_Chess.Pieces
             Position twoStepPosition = Direction.PositionAfterStepInDirection(singleForwardStep, Forward);
             if (!HasMoved && Board.IsPositionInBoard(twoStepPosition)  && board.GetPositionPiece(twoStepPosition) == null)
             {
-                MoveList += PiecePosition.ToString() + twoStepPosition.ToString();
+                MoveList += PiecePosition.ToString() + twoStepPosition.ToString() + ",";
             }
+            return MoveList;
+        }
+
+        public string GetDiagonalMoves(Board board)
+        {
+            string MoveList = "";
+            Position diagonalStep;
+            for (int i = 0;i < Diagonals.Length; i++)
+            {
+                diagonalStep = Direction.PositionAfterStepInDirection(PiecePosition, Diagonals[i]);
+                Piece pieceInDiagonal = board.GetPositionPiece(diagonalStep);
+                if (Board.IsPositionInBoard(diagonalStep) && pieceInDiagonal  != null && pieceInDiagonal.GetPlayer() != this.GetPlayer())
+                {
+                    MoveList += PiecePosition.ToString() + diagonalStep.ToString() + ",";
+                }
+            }
+
             return MoveList;
         }
         public override string ToString()
