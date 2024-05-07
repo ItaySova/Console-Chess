@@ -27,6 +27,10 @@ namespace Console_Chess.Pieces
         {
             return HasMoved;
         }
+        public void SetHasMoved(bool move)
+        {
+            HasMoved = move;
+        }
 
         public Position GetPosition()
         {
