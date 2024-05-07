@@ -30,7 +30,7 @@ namespace Console_Chess.Pieces
         {
             string MovesList = "";
             MovesList += GetForwardMoves(board);
-            return base.GetMoves(board);
+            return MovesList;
         }
 
         public string GetForwardMoves(Board board)
@@ -40,9 +40,9 @@ namespace Console_Chess.Pieces
             Position singleForwardStep = Direction.PositionAfterStepInDirection(PiecePosition, Forward);
             if(Board.IsPositionInBoard(singleForwardStep) && board.GetPositionPiece(singleForwardStep) == null)
             {
-                MoveList += PiecePosition.ToString() + singleForwardStep.ToString();
+                MoveList += PiecePosition.ToString() + singleForwardStep.ToString() + ",";
             }
-            Position twoStepPosition = Direction.PositionAfterStepInDirection(PiecePosition, Forward);
+            Position twoStepPosition = Direction.PositionAfterStepInDirection(singleForwardStep, Forward);
             if (!HasMoved && Board.IsPositionInBoard(twoStepPosition)  && board.GetPositionPiece(twoStepPosition) == null)
             {
                 MoveList += PiecePosition.ToString() + twoStepPosition.ToString();
