@@ -15,7 +15,13 @@ namespace Console_Chess.Tests
         {
             Board board = new Board();
             Piece blackPawn = new Pawn(false, new Position(1,4));
+            Piece blackNearWhitePawn = new Pawn(false, new Position(5, 0));
+            Piece blackOnEdge = new Pawn(false, new Position(7, 7));
+            Piece blackRow2 = new Pawn(false, new Position(6, 6));
             Piece whitePawn = new Pawn(true, new Position(6, 1));
+            Piece whiteNearBlackPawn = new Pawn(true, new Position(2, 5));
+            Piece whiteOnEdge = new Pawn(true, new Position(0, 0));
+            Piece whiteRow7 = new Pawn(true, new Position(1, 6));
             if (!board.AddPiece(whitePawn))
             {
                 Console.WriteLine("white pawn not added");
@@ -23,6 +29,30 @@ namespace Console_Chess.Tests
             if (!board.AddPiece(blackPawn))
             {
                 Console.WriteLine("black pawn not added");
+            }
+            if (!board.AddPiece(blackNearWhitePawn))
+            {
+                Console.WriteLine("blackNearWhitePawn not added");
+            }
+            if (!board.AddPiece(whiteNearBlackPawn))
+            {
+                Console.WriteLine("whiteNearBlackPawn not added");
+            }
+            if (!board.AddPiece(whiteOnEdge))
+            {
+                Console.WriteLine("whiteOnEdge not added");
+            }
+            if (!board.AddPiece(blackOnEdge))
+            {
+                Console.WriteLine("blackOnEdge not added");
+            }
+            if (!board.AddPiece(blackRow2))
+            {
+                Console.WriteLine("blackRow2 not added");
+            }
+            if (!board.AddPiece(whiteRow7))
+            {
+                Console.WriteLine("whiteRow7 not added");
             }
 
             board.Print();
