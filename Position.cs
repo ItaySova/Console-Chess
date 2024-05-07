@@ -42,6 +42,7 @@ namespace Console_Chess
             return "" + letter + number;
         }
 
+        // consider removing!
         public static bool ISStringPosEqualToPos(string str, Position pos)
         {
             if(str.Length != 2)
