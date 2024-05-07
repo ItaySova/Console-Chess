@@ -91,5 +91,25 @@ namespace Console_Chess
             }
             return pieceToRemove;
         }
+
+        // function for adding piece - mainly for tests
+        public bool AddPiece(Piece piece)
+        {
+            // invalid piece to add to board
+            if (piece == null  || piece.GetPosition() == null)
+            {
+                return false;
+            }
+            // check if position is occupied 
+            Position targetPos = piece.GetPosition();
+            Piece pieceAtTargetPos = GetPositionPiece(targetPos);
+            if (pieceAtTargetPos != null)
+            {
+                return false;
+            }
+            // if position is empty:
+            Pieces[targetPos.GetRow(), targetPos.GetColumn()] = piece;
+            return true;
+        }
     }
 }
