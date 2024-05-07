@@ -23,6 +23,20 @@ namespace Console_Chess
                     Console.WriteLine("Board test!");
                     BoardTests tb1 = new BoardTests();
                     tb1.Play();
+                } else if (args[0] == "pieces")
+                {
+                    Console.WriteLine("pieces get moves test - which would you like to check:");
+                    string inpuy = Console.ReadLine();
+                    switch (inpuy)
+                    {
+                        case "Queen":
+                            Console.WriteLine("testing queen:");
+                            break;
+                        default:
+                            Console.WriteLine("testing pawn:");
+                            GetMovesTest.GetMovesTestPawm();
+                            break;
+                    }
                 }
                 
             } else
