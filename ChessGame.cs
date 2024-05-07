@@ -68,7 +68,9 @@ namespace Console_Chess
                     Piece Chosen = board.GetPositionPiece(FromPos);
                     // validation for choosing a piece which belong to turns player and not an empty square
                     isValid = Chosen != null && IsPieceBelongToPlayer(Chosen);
-                    // add validation for the move itself - such as if the move is legal for the piece or if it leaves the player in check
+                    // add validation for if the move is in piece list of moves
+
+                    // add validation that the move doesnt leave a player in check
                 }
                 // massage for invalid move - 
                 if(!isValid)
