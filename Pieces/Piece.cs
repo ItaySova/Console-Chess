@@ -76,9 +76,18 @@ namespace Console_Chess.Pieces
             return MoveList;
         }
 
-        public virtual bool CanCaptureKing(Board board, King OpponentKing)
+        public virtual bool CanCaptureKing(Board board, Piece opponentKing)
         {
-            return true;
+            // create a move from the piece position and check if it is legal
+            // if so - return true - otherwise false
+            Position fromPosition = PiecePosition;
+            Position toPosition = opponentKing.PiecePosition;
+            Move checkMove = new Move(fromPosition, toPosition);
+            // check only if the move is in the move list:
+            string[] MoveArr = (GetMoves(board)).Split(',');
+            // Todo - change for full legality check later
+
+            return Array.IndexOf(MoveArr, checkMove.ToString()) != -1;
         }
         public override string ToString()
         {
