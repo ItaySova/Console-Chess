@@ -89,6 +89,12 @@ namespace Console_Chess.Tests
         public static void GetMovesTestQueen()
         {
             Board board = new Board();
+            Piece whiteQueen = new Queen(true, new Position(7, 3));
+            Piece blackQueen = new Queen(false, new Position(1, 3));
+            board.AddPiece(blackQueen);
+            board.AddPiece(whiteQueen);
+            ChessGame testGame = new GetMovesTest(board);
+            testGame.Play();
         }
 
         public static void GetMovesTestBishop()
@@ -137,9 +143,18 @@ namespace Console_Chess.Tests
                     "piece chosen: " + Chosen);
                 //testBoard.RemovePiece(playerMove.GetFromPos()); // - later for moving
                 CurrentPieceMoves = Chosen.GetMoves(testBoard);
+                string[] MovesArr = CurrentPieceMoves.Split(',');
                 int[] coords = playerMove.GetFromPos().GetCoordinates();
                 Console.WriteLine("player " + (Player ? "white" : "black") + " moves for chosen piece at:" + playerMove.GetFromPos() + " or " +
-                    coords[0] +", " + coords[1] + " is: " + CurrentPieceMoves);
+                    coords[0] +", " + coords[1] + " is: ");
+                for(int i=0; i< MovesArr.Length; i++)
+                {
+                    if (MovesArr[i] != "")
+                    {
+                        Console.Write(MovesArr[i] + ",");
+                    }
+                }
+                Console.WriteLine();
 
                 // print the board with the position available for chosen piece:
                 testBoard.Print(CurrentPieceMoves);
