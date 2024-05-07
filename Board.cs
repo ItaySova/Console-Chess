@@ -127,6 +127,47 @@ namespace Console_Chess
                 pos.GetColumn() <=7);
         }
 
+        //get all pieces for player: 
+        public Piece[] GetAllPiecesForPlayer(bool player)
+        {
+            // each player has maximum 16 pieces
+            Piece[] playerPieces = new Piece[16];
+            int PiecesIndex = 0;
+            for(int row=0; row<8; row++)
+            {
+                for(int col=0; col<8; col++)
+                {
+                    if (Pieces[row,col] != null)
+                    {
+                        if(Pieces[row, col].GetPlayer() == player)
+                        {
+                            playerPieces[PiecesIndex] = Pieces[row, col];
+                            PiecesIndex++;
+                        }                        
+                    }
+                }
+            }
+            return playerPieces;
+        }
+
+        public string GetAllMovesForPieces(Piece[] playerPieces)
+        {
+            string UnitedMoveList = "";
+            for (int i=0;i<playerPieces.Length; i++)
+            {
+                if (playerPieces[i] != null)
+                {
+                    UnitedMoveList += playerPieces[i].GetMoves(this);
+                }
+                // for debugging and some optimizations sake:
+                else
+                {
+                    break;
+                }
+            }
+            return UnitedMoveList;
+        }
+
         public Piece RemovePiece(Position pos)
         {
             Piece pieceToRemove = Pieces[pos.GetRow(), pos.GetColumn()];
