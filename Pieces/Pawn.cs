@@ -30,6 +30,7 @@ namespace Console_Chess.Pieces
         {
             string MovesList = "";
             MovesList += GetForwardMoves(board);
+            MovesList += GetDiagonalMoves(board);
             return MovesList;
         }
 
@@ -57,10 +58,14 @@ namespace Console_Chess.Pieces
             for (int i = 0;i < Diagonals.Length; i++)
             {
                 diagonalStep = Direction.PositionAfterStepInDirection(PiecePosition, Diagonals[i]);
-                Piece pieceInDiagonal = board.GetPositionPiece(diagonalStep);
-                if (Board.IsPositionInBoard(diagonalStep) && pieceInDiagonal  != null && pieceInDiagonal.GetPlayer() != this.GetPlayer())
+                
+                if (Board.IsPositionInBoard(diagonalStep)) // of the position is inside the board
                 {
-                    MoveList += PiecePosition.ToString() + diagonalStep.ToString() + ",";
+                    Piece pieceInDiagonal = board.GetPositionPiece(diagonalStep);
+                    if (pieceInDiagonal != null && pieceInDiagonal.GetPlayer() != this.GetPlayer()) // if there is an oponent piece
+                    {
+                        MoveList += PiecePosition.ToString() + diagonalStep.ToString() + ",";
+                    }                    
                 }
             }
 
