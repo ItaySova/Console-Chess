@@ -22,6 +22,15 @@ namespace Console_Chess
             TurnCount = 0;
         }
 
+        // constructor for testing different board stated
+        public ChessGame(Board board)
+        {
+            this.board = board;
+            TurnPlayer = true;
+            IsGameOver=false;
+            TurnCount = 0;
+        }
+
         public virtual void Play() // virtual for tests
         {
             while (!IsGameOver)
