@@ -54,6 +54,25 @@ namespace Console_Chess
                             GetMovesTest.GetMovesTestPawm();
                             break;
                     }
+                } else if (args[0] == "getallmoves")
+                {
+                    Console.WriteLine("testing get all moves:");
+                    GetAllMovesAndExecuteTest.GetAllMovesTest();
+                } else if (args[0] == "simulation")
+                {
+                    Console.WriteLine("which simulation to run? ");
+                    string simulation = Console.ReadLine();
+                    switch (simulation)
+                    {
+                        case "1":
+                            Console.WriteLine("running simulation number 1");
+                            GameSimulations.Simulation1();
+                            break;
+                        default :
+                            Console.WriteLine("invalid input - running simulation number 1");
+                            GameSimulations.Simulation1();
+                            break;
+                    }
                 }
                 
             } else
