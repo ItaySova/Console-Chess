@@ -90,96 +90,20 @@ namespace Console_Chess.Tests
 
         public static void SimulationDestribute()
         {
-            Console.WriteLine("which simulation to run? ");
+            Console.WriteLine("which simulation to run? \n1.random clean simulation\n2.quick checkmate\n3.manuall");
             string simulation = Console.ReadLine();
             switch (simulation)
             {
                 case "1":
-                    Console.WriteLine("running simulation number 1");
-                    GameSimulations.Simulation1();
+                    GameSimulations.Simulation1(simulation);
+                    break;
+                case "2":
+                    GameSimulations.Simulation1(simulation);
                     break;
                 default:
-                    Console.WriteLine("invalid input - running simulation number 1");
-                    GameSimulations.Simulation1();
+                    Console.WriteLine("not valid running manuall");
+                    GameSimulations.Simulation1("1");
                     break;
-            }
-        }
-
-        public static void historicDistrubution(string arg)
-        {
-            if (arg == "input")
-            {
-                InputTests.TestUserInputs();
-
-                Console.WriteLine("press enter for next tests (UserInputtest):");
-                Console.ReadLine();
-                UserInputTest t2 = new UserInputTest();
-                t2.Play();
-            }
-            else if (arg == "board")
-            {
-                //BoardTests.GetPositionTest();
-                Console.WriteLine("Board test!");
-                BoardTests tb1 = new BoardTests();
-                tb1.Play();
-            }
-            else if (arg == "pieces")
-            {
-                Console.WriteLine("pieces get moves test - which would you like to check:");
-                string inpuy = Console.ReadLine();
-                switch (inpuy)
-                {
-                    case "queen":
-                        Console.WriteLine("testing queen:");
-                        GetMovesTest.GetMovesTestQueen();
-                        break;
-                    case "bishop":
-                        Console.WriteLine("testing bishop:");
-                        GetMovesTest.GetMovesTestBishop();
-                        break;
-                    case "king":
-                        Console.WriteLine("testing king:");
-                        GetMovesTest.GetMovesTestking();
-                        break;
-                    case "rook":
-                        Console.WriteLine("testing rook:");
-                        GetMovesTest.GetMovesTestRook();
-                        break;
-                    case "knight":
-                        Console.WriteLine("testing knight:");
-                        GetMovesTest.GetMovesTestKnight();
-                        break;
-                    default:
-                        Console.WriteLine("testing pawn:");
-                        GetMovesTest.GetMovesTestPawm();
-                        break;
-                }
-            }
-            else if (arg == "getallmoves")
-            {
-                Console.WriteLine("testing get all moves:");
-                GetAllMovesAndExecuteTest.GetAllMovesTest();
-            }
-            else if (arg == "simulation")
-            {
-                Console.WriteLine("which simulation to run? ");
-                string simulation = Console.ReadLine();
-                switch (simulation)
-                {
-                    case "1":
-                        Console.WriteLine("running simulation number 1");
-                        GameSimulations.Simulation1();
-                        break;
-                    default:
-                        Console.WriteLine("invalid input - running simulation number 1");
-                        GameSimulations.Simulation1();
-                        break;
-                }
-            }
-            else if (arg == "logic")
-            {
-                Console.WriteLine("testing new logic");
-                NewGameLogicTest.NewLogic();
             }
         }
     }
