@@ -49,7 +49,7 @@ namespace Console_Chess.Tests
             {
 
                 // get all available moves
-                string[] MovesAvailable = GetAllPlayerMoves();
+                string[] MovesAvailable = state.GetAllPossibleMoves(board);
                 if (MovesMarked)
                 {
                     string[] MovesCopyForPrint = new string[MovesAvailable.Length];
