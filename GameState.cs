@@ -60,6 +60,11 @@ namespace Console_Chess
             }
             return false;
         }
+
+        public void UpdateEnPassantPosition(Board board, Position EnPassantPos)
+        {
+            Console.WriteLine("en passant updated in position " + EnPassantPos.ToString());
+        }
         public bool GetPlayer()
         {
             return TurnPlayer;
