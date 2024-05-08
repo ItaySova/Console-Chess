@@ -96,6 +96,15 @@ namespace Console_Chess.Pieces
             pieceCopy.HasMoved = this.HasMoved;
             return pieceCopy;
         }
+
+        public override bool Equals(object? obj)
+        {
+            Piece other = obj as Piece;
+            if (other == null) return false;
+
+            return this.ToString() == other.ToString() &&
+                this.PiecePosition.ToString() == other.PiecePosition.ToString();
+        }
         public override string ToString()
         {
             return IsWhite ? "w" : "b";
