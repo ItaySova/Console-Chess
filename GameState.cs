@@ -19,6 +19,7 @@ namespace Console_Chess
         string BoardHistorySecondTime;
         string BoardHistoryThirdTime;
         string Result = "";
+        Position EnPassantPosition = null;
 
         public GameState(bool turnPlayer, bool gameOver, bool isCheck, int turnCount,
             string boardHistoryFirstTime, string boardHistorySecondTime,
