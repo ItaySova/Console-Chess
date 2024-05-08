@@ -66,7 +66,7 @@ namespace Console_Chess.Tests
                 bool isMoveValid = IsMoveInAllPlayerMoves(playerMove);
                 Console.WriteLine((isMoveValid ? "execute input:" : "invalid move"));
                 // executing the input
-                ExecuteMove(testBoard,playerMove);
+                ExecuteMove(testBoard,playerMove,null);
                 // change the turn player and incrementing turn count:
                 Console.WriteLine("press enter to continue");
                 Console.ReadLine();
@@ -144,7 +144,7 @@ namespace Console_Chess.Tests
                     
 
                 // executing the input
-                ExecuteMove(testBoard,playerMove);
+                ExecuteMove(testBoard,playerMove, state);
                 // change the turn player and incrementing turn count:
                 Console.WriteLine((state.GetPlayer() ? "white" : "black") + " chose the move " + playerMove.ToString());
                 Console.WriteLine("press enter to continue");
