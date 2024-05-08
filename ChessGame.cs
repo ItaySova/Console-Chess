@@ -222,8 +222,16 @@ namespace Console_Chess
             pieceCopy.SetPiecePosition(move.GetToPosition());
             pieceCopy.SetHasMoved(true);
 
+            SendEnPassantToState(board, pieceCopy, move, state);
+
+
+            return board.AddPiece(pieceCopy); // change later to reset 50 move rule
+        }
+
+        public static void SendEnPassantToState(Board board, Piece piece, Move move, GameState state)
+        {
             // setting and removing en passant rights for the NEXT move
-            if (pieceCopy is Pawn)
+            if (piece is Pawn)
             {
                 // checking the distance between from and to and if == 2 update middle position for en passant
                 // distance between positions is only on the row difference
@@ -233,14 +241,18 @@ namespace Console_Chess
                 if (rowDistance == 2)
                 {
                     Position enPassantPos = new Position((fromRow + toRow) / 2, move.GetFromPos().GetColumn());
-                    state.UpdateEnPassantPosition(board,enPassantPos);
+                    state.UpdateEnPassantPosition(board, enPassantPos, move.GetToPosition());
+                }
+                else
+                {
+                    state.UpdateEnPassantPosition(board, null, null);
                 }
             }
             else
             {
-                // set the en passant position to null 
+                // set the en passant position to null since no pawn moved 
+                state.UpdateEnPassantPosition(board, null, null);
             }
-            return board.AddPiece(pieceCopy); // change later to reset 50 move rule
         }
 
     }
