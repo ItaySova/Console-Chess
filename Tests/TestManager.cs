@@ -100,6 +100,9 @@ namespace Console_Chess.Tests
                 case "2":
                     GameSimulations.Simulation1(simulation);
                     break;
+                case "3":
+                    GameSimulations.Simulation1(simulation);
+                    break;
                 default:
                     Console.WriteLine("not valid running manuall");
                     GameSimulations.Simulation1("1");
