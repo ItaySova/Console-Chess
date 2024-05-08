@@ -9,72 +9,7 @@ namespace Console_Chess
             // tests
             if (args.Length != 0)
             {
-                if (args[0] == "input")
-                {
-                    InputTests.TestUserInputs();
-
-                    Console.WriteLine("press enter for next tests (UserInputtest):");
-                    Console.ReadLine();
-                    UserInputTest t2 = new UserInputTest();
-                    t2.Play();
-                } else if (args[0] == "board")
-                {
-                    //BoardTests.GetPositionTest();
-                    Console.WriteLine("Board test!");
-                    BoardTests tb1 = new BoardTests();
-                    tb1.Play();
-                } else if (args[0] == "pieces")
-                {
-                    Console.WriteLine("pieces get moves test - which would you like to check:");
-                    string inpuy = Console.ReadLine();
-                    switch (inpuy)
-                    {
-                        case "queen":
-                            Console.WriteLine("testing queen:");
-                            GetMovesTest.GetMovesTestQueen();
-                            break;
-                        case "bishop":
-                            Console.WriteLine("testing bishop:");
-                            GetMovesTest.GetMovesTestBishop();
-                            break;
-                        case "king":
-                            Console.WriteLine("testing king:");
-                            GetMovesTest.GetMovesTestking();
-                            break;
-                        case "rook":
-                            Console.WriteLine("testing rook:");
-                            GetMovesTest.GetMovesTestRook();
-                            break;
-                        case "knight":
-                            Console.WriteLine("testing knight:");
-                            GetMovesTest.GetMovesTestKnight();
-                            break;
-                        default:
-                            Console.WriteLine("testing pawn:");
-                            GetMovesTest.GetMovesTestPawm();
-                            break;
-                    }
-                } else if (args[0] == "getallmoves")
-                {
-                    Console.WriteLine("testing get all moves:");
-                    GetAllMovesAndExecuteTest.GetAllMovesTest();
-                } else if (args[0] == "simulation")
-                {
-                    Console.WriteLine("which simulation to run? ");
-                    string simulation = Console.ReadLine();
-                    switch (simulation)
-                    {
-                        case "1":
-                            Console.WriteLine("running simulation number 1");
-                            GameSimulations.Simulation1();
-                            break;
-                        default :
-                            Console.WriteLine("invalid input - running simulation number 1");
-                            GameSimulations.Simulation1();
-                            break;
-                    }
-                }
-                
+                TestManager.TestDistribute(args[0]);                
             } else
             {
                 ChessGame game = new ChessGame();
