@@ -192,6 +192,22 @@ namespace Console_Chess
             return playerPieces;
         }
 
+        // function for En passant implementation:
+        public Piece[] GetAllPawnsForPlayer(bool player)
+        {
+            Piece[] pawns = new Piece[8]; // will be maimum 8
+            Piece[] allPieces = GetAllPiecesForPlayer(player);
+            for(int i=0, pawnsIndex=0; i< allPieces.Length; i++)
+            {
+                if (allPieces[i] != null && allPieces[i] is Pawn)
+                {
+                    pawns[pawnsIndex] = allPieces[i];
+                    pawnsIndex++;
+                }
+            }
+            return pawns;
+        }
+
         public string GetAllMovesForPieces(Piece[] playerPieces)
         {
             string UnitedMoveList = "";
