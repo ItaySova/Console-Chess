@@ -48,7 +48,6 @@ namespace Console_Chess.Tests
                             NewGameLogicTest.NewLogic();
                             break;
                     }
-                    NewGameLogicTest.NewLogic();
                     break;
                 default:
                     Console.WriteLine("option chosen not available");
