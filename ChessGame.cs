@@ -222,8 +222,24 @@ namespace Console_Chess
             pieceCopy.SetPiecePosition(move.GetToPosition());
             pieceCopy.SetHasMoved(true);
 
-            // helper for setting and removing en passant rights for the NEXT move
-
+            // setting and removing en passant rights for the NEXT move
+            if (pieceCopy is Pawn)
+            {
+                // checking the distance between from and to and if == 2 update middle position for en passant
+                // distance between positions is only on the row difference
+                int fromRow = move.GetFromPos().GetRow();
+                int toRow = move.GetToPosition().GetRow();
+                int rowDistance = fromRow > toRow ? fromRow - toRow : toRow - fromRow;
+                if (rowDistance == 2)
+                {
+                    Position enPassantPos = new Position((fromRow + toRow) / 2, move.GetFromPos().GetColumn());
+                    state.UpdateEnPassantPosition(board,enPassantPos);
+                }
+            }
+            else
+            {
+                // set the en passant position to null 
+            }
             return board.AddPiece(pieceCopy); // change later to reset 50 move rule
         }
 
