@@ -52,6 +52,7 @@ namespace Console_Chess
             Position pos = new Position(row, col);
             return pos;
         }
+
         // consider removing!
         public static bool ISStringPosEqualToPos(string str, Position pos)
         {
