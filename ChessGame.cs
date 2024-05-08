@@ -34,13 +34,14 @@ namespace Console_Chess
 
         public virtual void Play() // virtual for tests
         {
-            while (!IsGameOver)
+            GameState state = new GameState();
+            while (!state.GetGameOver())
             {
                 string[] MovesAvailable = GetAllPlayerMoves();
                 // printing
                 board.Print();
-                bool check = isPlayerInCheck();
-                Console.WriteLine(check ? "CHECK" : "");
+                Console.WriteLine(state.GetCheckStatus() ? "CHECK" : "");
+                string[] LegalMoves = state.GetLegalMoves(board, MovesAvailable);
                 bool isMoveValid = false;
                 Move playerMove = null;
                 // taking user input
@@ -51,17 +52,25 @@ namespace Console_Chess
                     if (!isMoveValid)
                     {
                         Console.WriteLine("move is not valid - try again");
+                        isMoveValid = IsMoveInAllPlayerMoves(playerMove);
+                    }
+                    if (isMoveValid)
+                    {
+                        Console.WriteLine("move is in all possible - check for legal moves");
+                        isMoveValid = Array.IndexOf(LegalMoves, playerMove.ToString()) != -1;
                     }
                 }
                 // add validation that the move doesnt leave a player in check
 
                 // executing the input
-                ExecuteMove(playerMove);
+                ExecuteMove(board, playerMove);
 
                 // change the turn player and incrementing turn count:
+                state.UpdateGameState(board);
                 TurnPlayer = !TurnPlayer;
                 TurnCount++;
             }
+            Console.WriteLine("GAME OVER BY " + state.GetResult());
         }
         public virtual Move UserInput() // virtual for tests
         {
@@ -190,11 +199,6 @@ namespace Console_Chess
             return TurnPlayer;
         }
 
-        public bool GetIsGameOver()
-        {
-            return IsGameOver;
-        }
-
         public Board GetBoard()
         {
             return board;
@@ -205,19 +209,19 @@ namespace Console_Chess
             this.TurnPlayer = turnPlayer;
         }
 
-        public bool ExecuteMove(Move move)
+        public static bool ExecuteMove(Board board, Move move)
         {
-            if(move == null)
+            if (move == null)
             {
+                Console.WriteLine("got empty move");
                 return false;
             }
             Piece pieceCopy = board.RemovePiece(move.GetFromPos());
             Piece ToPosCopy = board.RemovePiece(move.GetToPosition());
             pieceCopy.SetPiecePosition(move.GetToPosition());
             pieceCopy.SetHasMoved(true);
-            
-            return board.AddPiece(pieceCopy); // change later to reset 50 move rule
 
+            return board.AddPiece(pieceCopy); // change later to reset 50 move rule
         }
     }
 }
