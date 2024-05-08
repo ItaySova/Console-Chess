@@ -208,6 +208,20 @@ namespace Console_Chess
             TurnCount++;
         }
 
+        // function that will return the position of the Piece that can be captured:
+        public Position GetEnPassantCapturePosition()
+        {
+            if (WestToEnpassantPawn != null)
+            {
+                return Direction.PositionAfterStepInDirection(WestToEnpassantPawn, Direction.East);
+            }
+            if( EastToEnpassantPawn != null)
+            {
+                return Direction.PositionAfterStepInDirection(EastToEnpassantPawn, Direction.West);
+            }
+            return null;
+        }
+
         public void ComputeResult()
         {
             // is called in the end of the turn - if the next player is in check - its a win for !player

@@ -210,9 +210,31 @@ namespace Console_Chess
             this.TurnPlayer = turnPlayer;
         }
 
+        public static bool IsMoveEnPassant(Board board, Move move, GameState state)
+        {
+            // any move that reach here is already gone through validations:
+            string[] enPassantMoves = state.GetEnpassantMoves(board).Split(',');
+            if(enPassantMoves.Length == 1)
+            {
+                return false;
+            }
+            if(Array.IndexOf(enPassantMoves, move.ToString()) != -1)
+            {
+                Console.WriteLine("en passant capture");
+                return true;
+            }
+            return false;
+        }
         public static bool ExecuteMove(Board board, Move move, GameState state)
         {
             // check if move is a special move - for now en passant
+            if (IsMoveEnPassant(board, move, state))
+            {
+                Console.WriteLine("now remove the piece!");
+                
+                board.RemovePiece(state.GetEnPassantCapturePosition());
+            }
+
             if (move == null)
             {
                 Console.WriteLine("got empty move");
