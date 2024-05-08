@@ -37,7 +37,7 @@ namespace Console_Chess
             GameState state = new GameState();
             while (!state.GetGameOver())
             {
-                string[] MovesAvailable = GetAllPlayerMoves();
+                string[] MovesAvailable = state.GetAllPossibleMoves(board);
                 // printing
                 board.Print();
                 Console.WriteLine(state.GetCheckStatus() ? "CHECK" : "");
@@ -67,7 +67,8 @@ namespace Console_Chess
 
                 // change the turn player and incrementing turn count:
                 state.UpdateGameState(board);
-                TurnPlayer = !TurnPlayer;
+                TurnPlayer = state.GetPlayer();
+                //TurnPlayer = !TurnPlayer;
                 TurnCount++;
             }
             Console.WriteLine("GAME OVER BY " + state.GetResult());
