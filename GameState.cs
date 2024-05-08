@@ -59,6 +59,10 @@ namespace Console_Chess
             }
             return false;
         }
+        public bool GetPlayer()
+        {
+            return TurnPlayer;
+        }
 
         public bool GetCheckStatus()
         {
@@ -144,7 +148,7 @@ namespace Console_Chess
             // is called in the end of the turn - if the next player is in check - its a win for !player
             if (IsCheck)
             {
-                Console.WriteLine("the player:" + (TurnPlayer ? "white" : "black") + "has won the match");
+                Console.WriteLine("the player:" + (TurnPlayer ? "black" : "white") + " has won the match");
                 Result = "CHECKMATE";
             }
         }
