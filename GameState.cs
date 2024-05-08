@@ -148,6 +148,9 @@ namespace Console_Chess
             Piece[] allPlayerPieces = board.GetAllPiecesForPlayer(TurnPlayer);
             // get moves for all pieces
             string allPossibleMoves = board.GetAllMovesForPieces(allPlayerPieces);
+            // append en passant manually if not null 
+            string EnPassantMoves = GetEnpassantMoves(board);
+            allPossibleMoves += "," + EnPassantMoves;
             string[] movesArr = allPossibleMoves.Split(',');
             return movesArr;
         }
@@ -155,15 +158,31 @@ namespace Console_Chess
         public string GetEnpassantMoves(Board board)
         {
             string move = "";
+            Piece[] pawns = board.GetAllPawnsForPlayer(TurnPlayer);
             if(EnPassantPosition != null)
             {
-                if (Board.IsPositionInBoard(WestToEnpassantPawn))
+                if (WestToEnpassantPawn != null && Board.IsPositionInBoard(WestToEnpassantPawn))
                 {
-                    Piece pieceWestToEN = board.GetPositionPiece(WestToEnpassantPawn);                   
+                    Piece pieceWestToEN = board.GetPositionPiece(WestToEnpassantPawn);
+                    // go through the player pawns and check if they are equal to pieceWestToEN
+                    for (int i = 0; i < pawns.Length; i++)
+                    {
+                        if (pawns[i] != null && pawns[i].Equals(pieceWestToEN))
+                        {
+                            move += WestToEnpassantPawn.ToString() + EnPassantPosition.ToString() + ",";
+                        }
+                    }
                 }
-                if (Board.IsPositionInBoard(EastToEnpassantPawn))
+                if (EastToEnpassantPawn != null && Board.IsPositionInBoard(EastToEnpassantPawn))
                 {
                     Piece pieceEastToEN = board.GetPositionPiece(EastToEnpassantPawn);
+                    for (int i = 0; i < pawns.Length; i++)
+                    {
+                        if (pawns[i] != null && pawns[i].Equals(EastToEnpassantPawn))
+                        {
+                            move += EastToEnpassantPawn.ToString() + EnPassantPosition.ToString() + ",";
+                        }
+                    }
                 }
 
             }
