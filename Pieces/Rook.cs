@@ -29,6 +29,13 @@ namespace Console_Chess.Pieces
             return MoveList;
         }
 
+        public override Piece Copy()
+        {
+            Rook rookCopy = new Rook(this.IsWhite, this.PiecePosition);
+            rookCopy.HasMoved = this.HasMoved;
+            return rookCopy;
+        }
+
         public override string ToString()
         {
             return base.ToString() + "r";
