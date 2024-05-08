@@ -89,6 +89,13 @@ namespace Console_Chess.Pieces
 
             return Array.IndexOf(MoveArr, checkMove.ToString()) != -1;
         }
+
+        public virtual Piece Copy()
+        {
+            Piece pieceCopy = new Piece(this.IsWhite, this.PiecePosition);
+            pieceCopy.HasMoved = this.HasMoved;
+            return pieceCopy;
+        }
         public override string ToString()
         {
             return IsWhite ? "w" : "b";
