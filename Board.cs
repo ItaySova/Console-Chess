@@ -257,5 +257,40 @@ namespace Console_Chess
             }
             return null;
         }
+
+        public Board Copy()
+        {
+            Board copy = new Board();
+            for (int r=0;r<8;r++)
+            {
+                for(int c=0;c<8; c++)
+                {
+                    if (Pieces[r,c] != null)
+                    {
+                        copy.Pieces[r,c] = Pieces[r,c].Copy();
+                    }
+                }
+            }
+            return copy;
+        }
+
+        public override string ToString()
+        {
+            // will be represented as a 64 chars string where '_' represent emtpy space and each piece by its ToString
+            string BoardRepresentation = "";
+            for (int r=0;r<8; r++)
+            {
+                for(int col = 0; col < 8; col++)
+                {
+                    if (Pieces[r, col] != null)
+                    {
+                        BoardRepresentation += Pieces[r, col].ToString();
+                        continue;
+                    }
+                    BoardRepresentation += "_";
+                }
+            }
+            return BoardRepresentation;
+        }
     }
 }
