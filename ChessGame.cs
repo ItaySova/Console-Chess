@@ -212,6 +212,7 @@ namespace Console_Chess
 
         public static bool ExecuteMove(Board board, Move move, GameState state)
         {
+            // check if move is a special move - for now en passant
             if (move == null)
             {
                 Console.WriteLine("got empty move");
