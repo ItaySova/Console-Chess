@@ -20,6 +20,8 @@ namespace Console_Chess
         string BoardHistoryThirdTime;
         string Result = "";
         Position EnPassantPosition = null;
+        Position WestToEnpassantPawn;
+        Position EastToEnpassantPawn;
 
         public GameState(bool turnPlayer, bool gameOver, bool isCheck, int turnCount,
             string boardHistoryFirstTime, string boardHistorySecondTime,
@@ -61,9 +63,28 @@ namespace Console_Chess
             return false;
         }
 
-        public void UpdateEnPassantPosition(Board board, Position EnPassantPos)
+        public void UpdateEnPassantPosition(Board board, Position EnPassantPos, Position enPassantPawnPosition)
         {
-            Console.WriteLine("en passant updated in position " + EnPassantPos.ToString());
+            Console.WriteLine("en passant updated in position " + EnPassantPos);
+            EnPassantPosition = EnPassantPos;
+            if (EnPassantPos == null)
+            {
+                WestToEnpassantPawn = null;
+                EastToEnpassantPawn = null;
+            } else
+            {
+                WestToEnpassantPawn = Direction.PositionAfterStepInDirection(enPassantPawnPosition, Direction.West);
+                EastToEnpassantPawn = Direction.PositionAfterStepInDirection(enPassantPawnPosition, Direction.East);
+                // if either position is outside the board - change them to null
+                if (!Board.IsPositionInBoard(WestToEnpassantPawn))
+                {
+                    WestToEnpassantPawn = null;
+                }
+                if (!Board.IsPositionInBoard(EastToEnpassantPawn))
+                {
+                    EastToEnpassantPawn = null;
+                }
+            }
         }
         public bool GetPlayer()
         {
@@ -129,6 +150,25 @@ namespace Console_Chess
             string allPossibleMoves = board.GetAllMovesForPieces(allPlayerPieces);
             string[] movesArr = allPossibleMoves.Split(',');
             return movesArr;
+        }
+
+        public string GetEnpassantMoves(Board board)
+        {
+            string move = "";
+            if(EnPassantPosition != null)
+            {
+                if (Board.IsPositionInBoard(WestToEnpassantPawn))
+                {
+                    Piece pieceWestToEN = board.GetPositionPiece(WestToEnpassantPawn);                   
+                }
+                if (Board.IsPositionInBoard(EastToEnpassantPawn))
+                {
+                    Piece pieceEastToEN = board.GetPositionPiece(EastToEnpassantPawn);
+                }
+
+            }
+
+            return move;
         }
 
         public void UpdateGameState(Board board)
