@@ -72,6 +72,14 @@ namespace Console_Chess.Pieces
 
             return MoveList;
         }
+
+        public override Piece Copy()
+        {
+            Pawn copy = new Pawn(this.IsWhite, this.PiecePosition);
+            copy.HasMoved = this.HasMoved;
+            return copy;
+        }
+
         public override string ToString()
         {
             return base.ToString() + "p";
