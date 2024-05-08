@@ -18,6 +18,7 @@ namespace Console_Chess.Tests
             //ChessGame testGame = new GameSimulations();
             string[] inputs = { "e2e4", "f7f5", "b1c3", "b8c6" ,"d1h5","g7g6","h5f5","g6f5"};
             string[] inputsForQuickCheckmate = { "e2e4", "f7f5", "d2d3", "g7g5", "d1h5"};
+            string[] inputsForQuickBlackCheckMate = { };
 
             string[] inputsOfChoice = null;
             switch (option)
@@ -31,7 +32,8 @@ namespace Console_Chess.Tests
                     inputsOfChoice = inputsForQuickCheckmate;
                     break;
                 case "3":
-                    Console.WriteLine(" not implemented yet");
+                    Console.WriteLine("running quick black checkmate simulation");
+                    inputsOfChoice = inputsForQuickBlackCheckMate;
                     break;
                 default:
                     break;
@@ -85,7 +87,6 @@ namespace Console_Chess.Tests
         {
             Console.WriteLine("playing from moves test!");
             Board testBoard = GetBoard();
-            bool gameOver = false;
             int moveCounter = 0;
             GameState state = new GameState();
             bool ContinueManually = false;
