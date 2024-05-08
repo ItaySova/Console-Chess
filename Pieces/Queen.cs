@@ -31,6 +31,13 @@ namespace Console_Chess.Pieces
             }
             return MoveList;
         }
+
+        public override Piece Copy()
+        {
+            Queen queenCopy = new Queen(this.IsWhite, this.PiecePosition);
+            queenCopy.HasMoved = this.HasMoved;
+            return queenCopy;
+        }
         public override string ToString()
         {
             return base.ToString() + "q";
