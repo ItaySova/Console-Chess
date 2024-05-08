@@ -54,6 +54,14 @@ namespace Console_Chess.Pieces
             }
             return MoveList;
         }
+
+        public override Piece Copy()
+        {
+            Knight copy = new Knight(this.IsWhite, this.PiecePosition);
+            copy.HasMoved = this.HasMoved;
+            return copy;
+        }
+
         public override string ToString()
         {
             return base.ToString() + "n";
