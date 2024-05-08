@@ -143,6 +143,7 @@ namespace Console_Chess
         }
 
         // get ALL moves for optimisation and debugging purpose
+        // TODO - replace the function with the one in gameState
         public string[] GetAllPlayerMoves()
         {
             Piece[] allPlayerPieces = board.GetAllPiecesForPlayer(TurnPlayer);
