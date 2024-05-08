@@ -10,10 +10,10 @@ namespace Console_Chess
 {
     internal class ChessGame
     {
-        Board board;
-        bool TurnPlayer;
-        bool IsGameOver;
-        int TurnCount;
+        protected Board board;
+        protected bool TurnPlayer;
+        protected bool IsGameOver;
+        protected int TurnCount;
         public ChessGame()
         {
             board = new Board();
@@ -36,19 +36,22 @@ namespace Console_Chess
         {
             while (!IsGameOver)
             {
+                string[] MovesAvailable = GetAllPlayerMoves();
                 // printing
                 board.Print();
-
+                bool check = isPlayerInCheck();
+                Console.WriteLine(check ? "CHECK" : "");
+                bool isMoveValid = false;
+                Move playerMove = null;
                 // taking user input
-                Move playerMove = UserInput();
-                Console.WriteLine(playerMove.ToString());
-
-                // testing the input for valid input - rulewise
-                bool isMoveValid = IsMoveInAllPlayerMoves(playerMove);
-                if (!isMoveValid)
+                while (!isMoveValid)
                 {
-                    Console.WriteLine("move is not in all moves list - try again");
-                    continue;
+                    playerMove = UserInput();
+                    isMoveValid = Array.IndexOf(MovesAvailable, playerMove.ToString()) != -1;
+                    if (!isMoveValid)
+                    {
+                        Console.WriteLine("move is not valid - try again");
+                    }
                 }
                 // add validation that the move doesnt leave a player in check
 
@@ -126,6 +129,7 @@ namespace Console_Chess
             return isPieceBelongToPlayer;
         }
 
+        //TODO - refactor 
         public bool IsMoveInAllPlayerMoves(Move move)
         {
             // helpers - get all pieces for player
@@ -136,6 +140,16 @@ namespace Console_Chess
             // then check if the move in list
             return Array.IndexOf(movesArr, move.ToString()) != -1;
             //return true;
+        }
+
+        // get ALL moves for optimisation and debugging purpose
+        public string[] GetAllPlayerMoves()
+        {
+            Piece[] allPlayerPieces = board.GetAllPiecesForPlayer(TurnPlayer);
+            // get moves for all pieces
+            string allPossibleMoves = board.GetAllMovesForPieces(allPlayerPieces);
+            string[] movesArr = allPossibleMoves.Split(',');
+            return movesArr;
         }
 
         public virtual void GameSimulation(string[] inputs)
@@ -149,9 +163,19 @@ namespace Console_Chess
             Piece[] allOpponentPieces = board.GetAllPiecesForPlayer(!TurnPlayer);
             // get the current player king for its stored position 
             Piece currentPlayerKing = board.FindPlayerKing(TurnPlayer);
+            // check if there is no king return false for tests 
+            if(currentPlayerKing == null)
+            {
+                this.IsGameOver = true;
+                return false;
+            }
             // check for every enemy piece if at least one can capture the current king
             foreach (Piece piece in allOpponentPieces)
             {
+                if(piece == null)
+                {
+                    continue;
+                }
                 if (piece.CanCaptureKing(board, currentPlayerKing))
                 {
                     return true;
@@ -182,6 +206,10 @@ namespace Console_Chess
 
         public bool ExecuteMove(Move move)
         {
+            if(move == null)
+            {
+                return false;
+            }
             Piece pieceCopy = board.RemovePiece(move.GetFromPos());
             Piece ToPosCopy = board.RemovePiece(move.GetToPosition());
             pieceCopy.SetPiecePosition(move.GetToPosition());
@@ -192,3 +220,36 @@ namespace Console_Chess
         }
     }
 }
+
+
+/* old play funciotn:
+ *         public virtual void Play() // virtual for tests
+        {
+            while (!IsGameOver)
+            {
+                // printing
+                board.Print();
+
+                // taking user input
+                Move playerMove = UserInput();
+                Console.WriteLine(playerMove.ToString());
+
+                // testing the input for valid input - rulewise
+                bool isMoveValid = IsMoveInAllPlayerMoves(playerMove);
+                if (!isMoveValid)
+                {
+                    Console.WriteLine("move is not in all moves list - try again");
+                    continue;
+                }
+                // add validation that the move doesnt leave a player in check
+
+                // executing the input
+                ExecuteMove(playerMove);
+
+                // change the turn player and incrementing turn count:
+                TurnPlayer = !TurnPlayer;
+                TurnCount++;
+            }
+        }
+ 
+ */
