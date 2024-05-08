@@ -63,7 +63,7 @@ namespace Console_Chess
                 // add validation that the move doesnt leave a player in check
 
                 // executing the input
-                ExecuteMove(board, playerMove);
+                ExecuteMove(board, playerMove,state);
 
                 // change the turn player and incrementing turn count:
                 state.UpdateGameState(board);
@@ -210,7 +210,7 @@ namespace Console_Chess
             this.TurnPlayer = turnPlayer;
         }
 
-        public static bool ExecuteMove(Board board, Move move)
+        public static bool ExecuteMove(Board board, Move move, GameState state)
         {
             if (move == null)
             {
@@ -222,8 +222,11 @@ namespace Console_Chess
             pieceCopy.SetPiecePosition(move.GetToPosition());
             pieceCopy.SetHasMoved(true);
 
+            // helper for setting and removing en passant rights for the NEXT move
+
             return board.AddPiece(pieceCopy); // change later to reset 50 move rule
         }
+
     }
 }
 
