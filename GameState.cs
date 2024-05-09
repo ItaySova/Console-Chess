@@ -165,7 +165,7 @@ namespace Console_Chess
                 {
                     Piece pieceWestToEN = board.GetPositionPiece(WestToEnpassantPawn);
                     // go through the player pawns and check if they are equal to pieceWestToEN
-                    for (int i = 0; i < pawns.Length; i++)
+                    for (int i = 0; i < pawns.Length && pieceWestToEN != null; i++)
                     {
                         if (pawns[i] != null && pawns[i].Equals(pieceWestToEN))
                         {
@@ -176,7 +176,7 @@ namespace Console_Chess
                 if (EastToEnpassantPawn != null && Board.IsPositionInBoard(EastToEnpassantPawn))
                 {
                     Piece pieceEastToEN = board.GetPositionPiece(EastToEnpassantPawn);
-                    for (int i = 0; i < pawns.Length; i++)
+                    for (int i = 0; i < pawns.Length && pieceEastToEN != null; i++)
                     {
                         if (pawns[i] != null && pawns[i].Equals(pieceEastToEN))
                         {
@@ -197,6 +197,29 @@ namespace Console_Chess
             // 2 helpers - get castle from the king side - e8g8 for black or e1h1 for white,
             // and queen side e8c8 for black and e1c1 for whites
             return moves;
+        }
+
+        // for the 2 helpers - another helper in the isKingAndRookUnmoved
+        private bool CanCastleKingSide(Board board)
+        {
+            // turn player = true => white player => row is 7, otherwise 0
+            int KingRow = TurnPlayer ? 7 : 0;
+            Position AssumedKingPos = new Position(KingRow, 4);
+            return true;
+        }
+
+        private bool CanCastleQueenSide(Board board)
+        {
+            return true;
+        }
+
+        private bool IskingAndRookUnmoved(Board board, Position kingPos, Position rookPos)
+        {
+            Piece king = board.GetPositionPiece(kingPos);
+            Piece rook = board.GetPositionPiece(rookPos);
+            // if both position contain a piece - and both pieces has not moved - the pieces is necessarly a king and a rook
+            return king != null && rook != null &&
+                king.GetHasMoved() == false && rook.GetHasMoved() == false;
         }
         public void UpdateGameState(Board board)
         {
