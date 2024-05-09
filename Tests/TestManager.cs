@@ -49,6 +49,9 @@ namespace Console_Chess.Tests
                             break;
                     }
                     break;
+                case "custom":                    
+                    CustomDistrubute();
+                    break;
                 default:
                     Console.WriteLine("option chosen not available");
                     break;
@@ -106,6 +109,29 @@ namespace Console_Chess.Tests
                 default:
                     Console.WriteLine("not valid running manuall");
                     GameSimulations.Simulation1("1");
+                    break;
+            }
+        }
+
+        public static void CustomDistrubute()
+        {
+            Console.WriteLine("choose from the following Boards:\n1.Castling\n2.EnPassant\n3.PawnPromotion");
+            string option = Console.ReadLine();
+            switch (option)
+            {
+                case "1":
+                    GameWithCustomBoard.CastlingBoard();
+                    break;
+                case "2":
+                    GameWithCustomBoard.EnPassantBoard();
+                    break;
+                case "3":
+                    GameWithCustomBoard.PawnPromotionBoard();
+                    break;
+                default:
+                    Console.WriteLine("not a valid option - starting a standart game: ");
+                    ChessGame game = new ChessGame();
+                    game.Play();
                     break;
             }
         }
