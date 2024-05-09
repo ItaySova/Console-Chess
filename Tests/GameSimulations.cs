@@ -20,6 +20,7 @@ namespace Console_Chess.Tests
             string[] inputsForQuickCheckmate = { "e2e4", "f7f5", "d2d3", "g7g5", "d1h5"};
             string[] inputsForQuickBlackCheckMate = { "F2F4", "E7E5","G2G4","D8H4", "F4F5"};
             string[] EnPassantInputs = { "b2b4","g7g5","b2b4","a7a5"}; // Todo continue later
+            string[] CastlingInputs = { };
 
             string[] inputsOfChoice = null;
             switch (option)
@@ -36,12 +37,22 @@ namespace Console_Chess.Tests
                     Console.WriteLine("running quick black checkmate simulation");
                     inputsOfChoice = inputsForQuickBlackCheckMate;
                     break;
+                case "4":
+                    Console.WriteLine("running en passant simulation");
+                    inputsOfChoice = EnPassantInputs;
+                    break;
+                case "5":
+                    Console.WriteLine("running castling simulation");
+                    inputsOfChoice = inputsForQuickBlackCheckMate;
+                    break;
                 default:
                     break;
             }
-            //testGame.GameSimulation(inputs);
-            GameSimulations simu = new GameSimulations();
-            simu.GameSimulationWithInputCheck(inputsOfChoice);
+            ChessGame simu = new GameSimulations();
+            simu.GameSimulation(inputsOfChoice);
+            //testGame.GameSimulation(inputsOfChoice);
+            //GameSimulations simu = new GameSimulations();
+            //simu.GameSimulationWithInputCheck(inputsOfChoice);
         }
 
         public override void GameSimulation(string[] InputMoves)
@@ -75,6 +86,7 @@ namespace Console_Chess.Tests
                 }
                 Console.WriteLine("press enter to continue execute the input " + InputMoves[moveCounter]);
                 // executing the input
+                Console.ReadLine();
                 ExecuteMove(board, playerMove, state);
 
                 // change the turn player and incrementing turn count:
@@ -83,6 +95,11 @@ namespace Console_Chess.Tests
                 //TurnPlayer = !TurnPlayer;
                 TurnCount++;
                 moveCounter++;
+                if(moveCounter == InputMoves.Length)
+                {
+                    Console.WriteLine("input ended");
+                    break;
+                }
             }
             Console.WriteLine("GAME OVER BY " + state.GetResult());
         }
