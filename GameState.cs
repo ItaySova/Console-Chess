@@ -208,7 +208,8 @@ namespace Console_Chess
             Position AssumedKingPos = new Position(KingRow, 4);
             Position AssumedRookPos = new Position(KingRow, 7);
             bool unMoved = IskingAndRookUnmoved(board, AssumedKingPos, AssumedRookPos);
-            return unMoved;
+            bool IsSpacesBetweenKingAndRookEmpty = IsSpacesBetweenPositionsEmpty(board, AssumedKingPos, AssumedRookPos);
+            return unMoved && IsSpacesBetweenKingAndRookEmpty;
         }
 
         private bool CanCastleQueenSide(Board board)
@@ -217,7 +218,8 @@ namespace Console_Chess
             Position AssumedKingPos = new Position(KingRow, 4);
             Position AssumedRookPos = new Position(KingRow, 0);
             bool unMoved = IskingAndRookUnmoved(board, AssumedKingPos, AssumedRookPos);
-            return unMoved;
+            bool IsSpacesBetweenKingAndRookEmpty = IsSpacesBetweenPositionsEmpty(board, AssumedKingPos, AssumedRookPos);
+            return unMoved && IsSpacesBetweenKingAndRookEmpty;
         }
 
         private bool IskingAndRookUnmoved(Board board, Position kingPos, Position rookPos)
@@ -229,9 +231,21 @@ namespace Console_Chess
                 king.GetHasMoved() == false && rook.GetHasMoved() == false;
         }
 
-        // will check for 2 positions in the same row
+        // will check for 2 positions in the same row - not including the given positions
         private bool IsSpacesBetweenPositionsEmpty(Board board, Position from, Position to)
         {
+            int ColDelta = from.GetColumn() - to.GetColumn();
+            if (ColDelta == 0) return false; // the same position was given twice
+            // if the delta is negative - we step to the east - otherwise to the west
+            Direction FromToDirection = ColDelta > 0 ? Direction.West : Direction.East;
+            Position nextPos = Direction.PositionAfterStepInDirection(from, FromToDirection); // set next position
+            while (nextPos != to)
+            {
+                // if there is a non empty position -  return false
+                if (board.GetPositionPiece(nextPos) != null) return false;
+
+                nextPos = Direction.PositionAfterStepInDirection(nextPos,FromToDirection);
+            }
             return true;
         }
         public void UpdateGameState(Board board)
