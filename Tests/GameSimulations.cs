@@ -28,7 +28,7 @@ namespace Console_Chess.Tests
             , "g1h3", "g8h6", "h3g1", "h6g8"
             , "g1h3", "g8h6", "h3g1", "h6g8"
             , "g1h3", "g8h6", "h3g1", "h6g8"}; //
-            string[] FullGaryKasparovGame = { };
+            string[] FullGaryKasparovGame = { "e2e4","e7e5","g1h3","b8c6","d2d4","e5d4","f3d4", "g8f6"};
 
             string[] inputsOfChoice = null;
             switch (option)
