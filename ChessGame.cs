@@ -229,9 +229,38 @@ namespace Console_Chess
             return false;
         }
 
-        public static bool IsMoveCastling(Board board, Move move, GameState state)
+        public static bool IsMoveCastling(Board board, Move move)
         {
-            return true;
+            // will get the move and return if its castling of any type 
+            
+            return move.ToString() == "e1g1" || move.ToString() == "e1c1" ||
+                move.ToString() == "e8g8" || move.ToString() == "e8c8";
+        }
+
+        private static void SetCastlingRook(Board board, Move move)
+        {
+            Move rookMove;
+            Position toPosition = null;
+            Position rookOriginalPos = null;
+            int MoveRow = move.GetFromPos().GetRow();
+            if(move.ToString() == "e1g1" || move.ToString() == "e8g8")
+            {
+                // rook does h1f1 or rook does h8f8 (column h-> f or 7 - 5 
+                toPosition = new Position(MoveRow, 5);
+                rookOriginalPos = new Position(MoveRow, 7);
+            }
+            if (move.ToString() == "e1c1" || move.ToString() == "e8c8")
+            {
+                // rook does a1d1 or rook does a8d8 (column a-> d or 0 -> 3
+                toPosition = new Position(MoveRow, 3);
+                rookOriginalPos = new Position(MoveRow, 0);
+            }
+
+            rookMove = new Move(rookOriginalPos, toPosition);
+            // remove the rook from its position and place it instead in its place
+            Piece rookCopy = board.RemovePiece(rookOriginalPos);
+            rookCopy.SetPiecePosition(toPosition);
+            board.AddPiece(rookCopy);
         }
         public static bool ExecuteMove(Board board, Move move, GameState state)
         {
@@ -248,8 +277,15 @@ namespace Console_Chess
                 Console.WriteLine("got empty move");
                 return false;
             }
+            // normal move - remove the piece in from, remove the piece to,
             Piece pieceCopy = board.RemovePiece(move.GetFromPos());
             Piece ToPosCopy = board.RemovePiece(move.GetToPosition());
+            // check if a move is castling
+            if (IsMoveCastling(board, move))
+            {
+                Console.WriteLine("castling execute: " + move.ToString());
+                SetCastlingRook(board, move);
+            }
             pieceCopy.SetPiecePosition(move.GetToPosition());
             pieceCopy.SetHasMoved(true);
 
