@@ -299,8 +299,9 @@ namespace Console_Chess
             Piece ToPosCopy = board.RemovePiece(move.GetToPosition());
 
             // if a piece is captured - clean all history in state:
-            if(ToPosCopy != null)
+            if(ToPosCopy != null || pieceCopy is Pawn)
             {
+                state.SetTurnCount(0);
                 state.ClearHistory();
             }
 
