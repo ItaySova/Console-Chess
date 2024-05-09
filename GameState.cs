@@ -178,7 +178,7 @@ namespace Console_Chess
                     Piece pieceEastToEN = board.GetPositionPiece(EastToEnpassantPawn);
                     for (int i = 0; i < pawns.Length; i++)
                     {
-                        if (pawns[i] != null && pawns[i].Equals(EastToEnpassantPawn))
+                        if (pawns[i] != null && pawns[i].Equals(pieceEastToEN))
                         {
                             move += EastToEnpassantPawn.ToString() + EnPassantPosition.ToString() + ",";
                         }
@@ -190,6 +190,14 @@ namespace Console_Chess
             return move;
         }
 
+
+        public string GetCastlingMoves(Board board)
+        {
+            string moves = "";
+            // 2 helpers - get castle from the king side - e8g8 for black or e1h1 for white,
+            // and queen side e8c8 for black and e1c1 for whites
+            return moves;
+        }
         public void UpdateGameState(Board board)
         {
             TurnPlayer = !TurnPlayer;
