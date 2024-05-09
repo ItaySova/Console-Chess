@@ -94,11 +94,11 @@ namespace Console_Chess.Tests
                 // add validation that the move doesnt leave a player in check
 
                 // executing the input
-                ExecuteMove(board, playerMove);
+                ExecuteMove(board, playerMove, state);
 
                 // change the turn player and incrementing turn count:
                 state.UpdateGameState(board);
-                TurnPlayer = !TurnPlayer;
+                TurnPlayer = state.GetPlayer();
                 TurnCount++;
             };
             Console.WriteLine("GAME OVER BY " + state.GetResult());
