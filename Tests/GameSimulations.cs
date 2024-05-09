@@ -21,6 +21,13 @@ namespace Console_Chess.Tests
             string[] inputsForQuickBlackCheckMate = { "F2F4", "E7E5","G2G4","D8H4", "F4F5"};
             string[] EnPassantInputs = { "b2b4","g7g5","b2b4","a7a5"}; // Todo continue later
             string[] CastlingInputs = { };
+            string[] ThreeFoldInput = { "g1h3", "g8h6", "h3g1", "h6g8", "g1h3", "g8h6", "h3g1", "h6g8", "g1h3", "g8h6" };
+            string[] ThreeFoldIncorrect = { "g1h3", "g8h6", "h1g1", "h6g8", "g1h1", "g8h6", "h3g1", "h6g8",
+             "g1h3", "g8h6", "h3g1", "h6g8",
+             "g1h3", "g8h6", "h3g1", "h6g8"
+            , "g1h3", "g8h6", "h3g1", "h6g8"
+            , "g1h3", "g8h6", "h3g1", "h6g8"
+            , "g1h3", "g8h6", "h3g1", "h6g8"}; //
 
             string[] inputsOfChoice = null;
             switch (option)
@@ -43,7 +50,15 @@ namespace Console_Chess.Tests
                     break;
                 case "5":
                     Console.WriteLine("running castling simulation");
-                    inputsOfChoice = inputsForQuickBlackCheckMate;
+                    inputsOfChoice = CastlingInputs;
+                    break;
+                case "6":
+                    Console.WriteLine("running ThreeFoldInput simulation");
+                    inputsOfChoice = ThreeFoldInput;
+                    break;
+                case "7":
+                    Console.WriteLine("running ThreeFoldInput WRONG simulation");
+                    inputsOfChoice = ThreeFoldIncorrect;
                     break;
                 default:
                     break;
