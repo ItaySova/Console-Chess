@@ -228,6 +228,12 @@ namespace Console_Chess
             return king != null && rook != null &&
                 king.GetHasMoved() == false && rook.GetHasMoved() == false;
         }
+
+        // will check for 2 positions in the same row
+        private bool IsSpacesBetweenPositionsEmpty(Board board, Position from, Position to)
+        {
+            return true;
+        }
         public void UpdateGameState(Board board)
         {
             TurnPlayer = !TurnPlayer;
