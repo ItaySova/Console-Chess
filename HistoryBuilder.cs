@@ -17,6 +17,7 @@ namespace Console_Chess
             //  QSW QSB - queen side white, queen side black
             Snapshot += CastlingRights(board, state);
             // add En Passant Position as tostring position or nothing 
+            Snapshot += EnPassantRights(board, state);
             return Snapshot;
         }
 
@@ -56,7 +57,11 @@ namespace Console_Chess
         public static string EnPassantRights(Board board, GameState state)
         {
             string EnpassantRights = "";
-
+            Position pos = state.GetEnPassantPosition();
+            if (pos != null)
+            {
+                EnpassantRights += pos.ToString();
+            }
             return EnpassantRights;
         }
     }
