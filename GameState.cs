@@ -41,6 +41,10 @@ namespace Console_Chess
         {          
         }
 
+        public void SetTurnCount(int number)
+        {
+            TurnCount = number;
+        }
         public bool IsPlayerInCheck(Board board)
         {
             // get all opponent pieces
@@ -382,6 +386,11 @@ namespace Console_Chess
                 GameOver = true;
                 ComputeResult();
             }
+            if(TurnCount == 50)
+            {
+                GameOver = true;
+                ComputeResult("Fifty-Moves-Rule");
+            }
             TurnCount++;
         }
 
@@ -426,6 +435,11 @@ namespace Console_Chess
         {
             BoardHistoryFirstTime = "";
             BoardHistorySecondTime = "";
+        }
+
+        public bool IsFiftyMovesRule()
+        {
+            return TurnCount == 50;
         }
 
         // overload for case of having no legal moves left
