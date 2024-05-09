@@ -194,11 +194,48 @@ namespace Console_Chess
             return move;
         }
 
-        public Piece HandlePawnPromotion(Board board)
+        public void HandlePawnPromotion(Board board, Piece pawnToPromote)
         {
-            Piece chosenOption = null;
+            string choice = "";
+            bool validChoice = false;
+            while (!validChoice)
+            {
+                Console.WriteLine("Choose a piece to replace the pawn:\nq for queen\nb for bishop\nr for rook\nn for knight:");
+                choice = Console.ReadLine();
+                switch (choice)
+                {
+                    case "q":
+                    case "b":
+                    case "r":
+                    case "n":
+                        validChoice = true;
+                        break;
+                    default:
+                        Console.WriteLine("not a valid choice please try again");
+                        break;
+                }
+            }
 
-            return chosenOption;
+            board.RemovePiece(pawnToPromote.GetPosition());
+
+            switch (choice)
+            {
+                case "q":
+                    //pawnToPromote = new Queen(GetPlayer(), pawnToPromote.GetPosition());                    
+                    board.AddPiece(new Queen(GetPlayer(), pawnToPromote.GetPosition()));
+                    break;
+                case "b":
+                    board.AddPiece(new Bishop(GetPlayer(), pawnToPromote.GetPosition()));
+                    break;
+                case "r":
+                    board.AddPiece(new Rook(GetPlayer(), pawnToPromote.GetPosition()));
+                    break;
+                case "n":
+                    board.AddPiece(new Knight(GetPlayer(), pawnToPromote.GetPosition()));
+                    break;
+                default:
+                    break;
+            }
         }
         public string GetCastlingMoves(Board board)
         {
@@ -303,6 +340,17 @@ namespace Console_Chess
         }
         public void UpdateGameState(Board board)
         {
+            // before anything check if there is a need to promote a pawn and do it
+            Piece[] CurrentPlayerPawns = board.GetAllPawnsForPlayer(TurnPlayer);
+            for (int i= 0; i<CurrentPlayerPawns.Length; i++)
+            {
+                if(CurrentPlayerPawns[i] != null && (CurrentPlayerPawns[i].GetPosition().GetRow() == 7 || CurrentPlayerPawns[i].GetPosition().GetRow() == 0))
+                {
+                    HandlePawnPromotion(board, CurrentPlayerPawns[i]);
+                }
+            }
+
+
             TurnPlayer = !TurnPlayer;
             // update if the player of the next turn is in check
             IsCheck = IsPlayerInCheck(board);
