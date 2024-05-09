@@ -28,8 +28,8 @@ namespace Console_Chess.Tests
             , "g1h3", "g8h6", "h3g1", "h6g8"
             , "g1h3", "g8h6", "h3g1", "h6g8"
             , "g1h3", "g8h6", "h3g1", "h6g8"}; //
-            string[] FullGaryKasparovGame = { "e2e4","e7e5","g1h3","b8c6","d2d4","e5d4","f3d4", "g8f6","d4c6","b7c6","e4e5", "d8e7"
-            , "d1e2", "f6d5", "c2c4", "e7b2","b1d2", "d5f4","e2e3", "f4g6"}; // stopped befor move 11 of kasparov 
+            string[] FullGaryKasparovGame = { "e2e4","e7e5","g1f3","b8c6","d2d4","e5d4","f3d4", "g8f6","d4c6","b7c6","e4e5", "d8e7"
+            , "d1e2", "f6d5", "c2c4", "e7b4","b1d2", "d5f4","e2e3", "f4g6"}; // stopped befor move 11 of kasparov 
 
             string[] inputsOfChoice = null;
             switch (option)
@@ -55,14 +55,17 @@ namespace Console_Chess.Tests
                     inputsOfChoice = CastlingInputs;
                     break;
                 case "6":
+                    Console.WriteLine("Pawm promotion simulation");
+                    break;
+                case "7":
                     Console.WriteLine("running ThreeFoldInput simulation");
                     inputsOfChoice = ThreeFoldInput;
                     break;
-                case "7":
+                case "8":
                     Console.WriteLine("running ThreeFoldInput WRONG simulation");
                     inputsOfChoice = ThreeFoldIncorrect;
                     break;
-                case "8":
+                case "9":
                     Console.WriteLine("recreating Garry Kasparov VS Jorden van Forees");
                     inputsOfChoice = FullGaryKasparovGame;
                     break;
@@ -122,6 +125,7 @@ namespace Console_Chess.Tests
                     break;
                 }
             }
+            board.Print();
             Console.WriteLine("GAME OVER BY " + state.GetResult());
         }
 
