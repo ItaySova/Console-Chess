@@ -27,7 +27,26 @@ namespace Console_Chess.Tests
         public static void EnPassantBoard()
         {
             Board board = new Board();
+            board.AddPiece(new King(false, new Position(0, 4)));
+            board.AddPiece(new King(true, new Position(7, 4)));
             // add pieces later
+            board.AddPiece(new Pawn(false, new Position(2, 0)));
+            board.AddPiece(new Pawn(false, new Position(1, 1)));
+            board.AddPiece(new Pawn(false, new Position(2, 2)));
+            board.AddPiece(new Pawn(false, new Position(1, 3)));
+            board.AddPiece(new Pawn(false, new Position(2, 4)));
+            board.AddPiece(new Pawn(false, new Position(1, 5)));
+            board.AddPiece(new Pawn(false, new Position(2, 6)));
+            board.AddPiece(new Pawn(false, new Position(1, 7)));
+            // white
+            board.AddPiece(new Pawn(true, new Position(5, 0)));
+            board.AddPiece(new Pawn(true, new Position(4, 1)));
+            board.AddPiece(new Pawn(true, new Position(5, 2)));
+            board.AddPiece(new Pawn(true, new Position(4, 3)));
+            board.AddPiece(new Pawn(true, new Position(5, 4)));
+            board.AddPiece(new Pawn(true, new Position(4, 5)));
+            board.AddPiece(new Pawn(true, new Position(5, 6)));
+            board.AddPiece(new Pawn(true, new Position(4, 7)));
             ChessGame game = new ChessGame(board);
             game.Play();
         }
@@ -35,7 +54,13 @@ namespace Console_Chess.Tests
         public static void PawnPromotionBoard()
         {
             Board board = new Board();
+            board.AddPiece(new King(false, new Position(0, 4)));
+            board.AddPiece(new King(true, new Position(7, 4)));
             // add relevant pawns
+            board.AddPiece(new Pawn(false, new Position(4, 4)));
+            board.AddPiece(new Pawn(false, new Position(4, 5)));
+            board.AddPiece(new Pawn(true, new Position(3, 0)));
+            board.AddPiece(new Pawn(true, new Position(3, 1)));
             ChessGame game = new ChessGame(board);
             game.Play();
         }
