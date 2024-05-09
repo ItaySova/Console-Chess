@@ -50,6 +50,13 @@ namespace Console_Chess
                 while (!isMoveValid)
                 {
                     playerMove = UserInput();
+                    if(playerMove == null)
+                    {
+                        // means player resigned
+                        state.UpdateGameOver("RESIGN");
+                        break;
+                    }
+
                     isMoveValid = Array.IndexOf(MovesAvailable, playerMove.ToString()) != -1;
                     if (!isMoveValid)
                     {
@@ -61,6 +68,10 @@ namespace Console_Chess
                         Console.WriteLine("move is in all possible - check for legal moves");
                         isMoveValid = Array.IndexOf(LegalMoves, playerMove.ToString()) != -1;
                     }
+                }
+                if(playerMove == null)
+                {
+                    continue;
                 }
                 movesLog += playerMove.ToString() + ',';
 
@@ -85,6 +96,11 @@ namespace Console_Chess
             {
                 Console.WriteLine("what will be your move, " + (TurnPlayer?"white":"black"));
                 input = Console.ReadLine();
+                if (input == "RESIGN")
+                {
+                    return null;
+                }
+
                 if(ValidateInput(input))
                 {
                     // if the input is valid - convert to move and proceed
@@ -281,6 +297,13 @@ namespace Console_Chess
             // normal move - remove the piece in from, remove the piece to,
             Piece pieceCopy = board.RemovePiece(move.GetFromPos());
             Piece ToPosCopy = board.RemovePiece(move.GetToPosition());
+
+            // if a piece is captured - clean all history in state:
+            if(ToPosCopy != null)
+            {
+                state.ClearHistory();
+            }
+
             // check if a move is castling
             if (IsMoveCastling(board, move))
             {
