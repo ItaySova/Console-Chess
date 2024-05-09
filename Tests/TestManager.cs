@@ -94,7 +94,8 @@ namespace Console_Chess.Tests
         public static void SimulationDestribute()
         {
             Console.WriteLine("which simulation to run? \n1.random simulation\n2.quick checkmate\n3.inputsForQuickBlackCheckMate" +
-                "\n4.EnPassantInputs\n5.CastlingInputs\n6.PawnPromotionInputs");
+                "\n4.EnPassantInputs\n5.CastlingInputs\n6.PawnPromotionInputs\n7.ThreeFoldInput\n8.ThreeFoldInput second\n9." +
+                "Garry Kasparov VS Jorden van Forees");
             string simulation = Console.ReadLine();
             switch (simulation)
             {
@@ -104,6 +105,9 @@ namespace Console_Chess.Tests
                 case "4":
                 case "5":
                 case "6":
+                case "7":
+                case "8":
+                case "9":
                     GameSimulations.Simulation1(simulation);
                     break;
                 default:
