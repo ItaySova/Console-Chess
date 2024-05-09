@@ -171,6 +171,7 @@ namespace Console_Chess
             Console.WriteLine("virtual function for tests classes");
         }
 
+        // remove and fix simulation 
         public bool isPlayerInCheck()
         {
             // get all opponent pieces
@@ -267,7 +268,7 @@ namespace Console_Chess
             // check if move is a special move - for now en passant
             if (IsMoveEnPassant(board, move, state))
             {
-                Console.WriteLine("now remove the piece!");
+                //Console.WriteLine("now remove the piece!");
                 
                 board.RemovePiece(state.GetEnPassantCapturePosition());
             }
@@ -283,7 +284,7 @@ namespace Console_Chess
             // check if a move is castling
             if (IsMoveCastling(board, move))
             {
-                Console.WriteLine("castling execute: " + move.ToString());
+                //Console.WriteLine("castling execute: " + move.ToString());
                 SetCastlingRook(board, move);
             }
             pieceCopy.SetPiecePosition(move.GetToPosition());
@@ -293,6 +294,12 @@ namespace Console_Chess
 
 
             return board.AddPiece(pieceCopy); // change later to reset 50 move rule
+        }
+
+        // function overloading - execute for copies without the 
+        public static bool ExecuteMove(Board board, Move move)
+        {
+            return true;
         }
 
         public static void SendEnPassantToState(Board board, Piece piece, Move move, GameState state)
