@@ -93,17 +93,17 @@ namespace Console_Chess.Tests
 
         public static void SimulationDestribute()
         {
-            Console.WriteLine("which simulation to run? \n1.random clean simulation\n2.quick checkmate\n3.manuall");
+            Console.WriteLine("which simulation to run? \n1.random simulation\n2.quick checkmate\n3.inputsForQuickBlackCheckMate" +
+                "\n4.EnPassantInputs\n5.CastlingInputs\n6.PawnPromotionInputs");
             string simulation = Console.ReadLine();
             switch (simulation)
             {
                 case "1":
-                    GameSimulations.Simulation1(simulation);
-                    break;
                 case "2":
-                    GameSimulations.Simulation1(simulation);
-                    break;
                 case "3":
+                case "4":
+                case "5":
+                case "6":
                     GameSimulations.Simulation1(simulation);
                     break;
                 default:
