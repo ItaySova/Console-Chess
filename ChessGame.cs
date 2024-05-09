@@ -287,6 +287,7 @@ namespace Console_Chess
                 //Console.WriteLine("castling execute: " + move.ToString());
                 SetCastlingRook(board, move);
             }
+                        
             pieceCopy.SetPiecePosition(move.GetToPosition());
             pieceCopy.SetHasMoved(true);
 
