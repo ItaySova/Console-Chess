@@ -46,41 +46,45 @@ namespace Console_Chess.Tests
 
         public override void GameSimulation(string[] InputMoves)
         {
-            Console.WriteLine("playing from moves test!");
-            Board testBoard = GetBoard();
-            bool Player = GetTurnPlayer();
-            bool gameOver = false;
+            GameState state = new GameState();
             int moveCounter = 0;
-            while (!gameOver)
+            while (!state.GetGameOver())
             {
-
+                string[] MovesAvailable = state.GetAllPossibleMoves(board);
                 // printing
-                testBoard.Print();
-                bool checkTest = isPlayerInCheck();
-
+                board.Print();
+                Console.WriteLine(state.GetCheckStatus() ? "CHECK" : "");
+                string[] LegalMoves = state.GetLegalMoves(board, MovesAvailable);
+                bool isMoveValid = false;
+                Move playerMove = null;
                 // taking user input
-                Move playerMove = ConvertInputToMove(InputMoves[moveCounter]);
-                Console.WriteLine(playerMove.ToString() +" by player: " + (Player?"white":"black"));
-                Console.WriteLine((checkTest?"player is in Check":"player is not in check!"));
-
-                // testing the input for valid input - rulewise
-                bool isMoveValid = IsMoveInAllPlayerMoves(playerMove);
-                Console.WriteLine((isMoveValid ? "execute input:" : "invalid move"));
-                // executing the input
-                ExecuteMove(testBoard,playerMove,null);
-                // change the turn player and incrementing turn count:
-                Console.WriteLine("press enter to continue");
-                Console.ReadLine();
-                moveCounter++;
-                if(moveCounter == InputMoves.Length)
+                while (!isMoveValid)
                 {
-                    testBoard.Print();
-                    Console.WriteLine("ran out of automatic inputs");
-                    gameOver = true;
+                    playerMove = ValidateAutomationInput(InputMoves[moveCounter]);
+                    isMoveValid = Array.IndexOf(MovesAvailable, playerMove.ToString()) != -1;
+                    if (!isMoveValid)
+                    {
+                        Console.WriteLine("move is not valid - try again");
+                        isMoveValid = IsMoveInAllPlayerMoves(playerMove);
+                    }
+                    if (isMoveValid)
+                    {
+                        Console.WriteLine("move is in all possible - check for legal moves");
+                        isMoveValid = Array.IndexOf(LegalMoves, playerMove.ToString()) != -1;
+                    }
                 }
-                Player = !Player;
-                SetTurnPlayer(Player);
+                Console.WriteLine("press enter to continue execute the input " + InputMoves[moveCounter]);
+                // executing the input
+                ExecuteMove(board, playerMove, state);
+
+                // change the turn player and incrementing turn count:
+                state.UpdateGameState(board);
+                TurnPlayer = state.GetPlayer();
+                //TurnPlayer = !TurnPlayer;
+                TurnCount++;
+                moveCounter++;
             }
+            Console.WriteLine("GAME OVER BY " + state.GetResult());
         }
 
         // adding simulation with mistakes
@@ -185,7 +189,7 @@ namespace Console_Chess.Tests
             return PlayerMove;
         }
 
-        public Move ValidateAutomationInput(string input)
+        /*public Move ValidateAutomationInput(string input)
         {
             Board testBoard = GetBoard();
             bool Player = GetTurnPlayer();
@@ -208,7 +212,7 @@ namespace Console_Chess.Tests
                 }                
             }
             return PlayerMove;
-        }
+        }*/
 
         public void changeMoveIfNotInMovesList(string[] inputs, int counter)
         {
