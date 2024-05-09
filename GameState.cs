@@ -236,6 +236,7 @@ namespace Console_Chess
                 default:
                     break;
             }
+            board.GetPositionPiece(pawnToPromote.GetPosition()).SetHasMoved(true);
         }
         public string GetCastlingMoves(Board board)
         {
@@ -283,7 +284,7 @@ namespace Console_Chess
             return unMoved && IsSpacesBetweenPositionsEmpty(board, AssumedKingPos, AssumedRookPos);
         }
 
-        private bool IskingAndRookUnmoved(Board board, Position kingPos, Position rookPos)
+        public bool IskingAndRookUnmoved(Board board, Position kingPos, Position rookPos)
         {
             Piece king = board.GetPositionPiece(kingPos);
             Piece rook = board.GetPositionPiece(rookPos);
