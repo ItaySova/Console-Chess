@@ -194,7 +194,12 @@ namespace Console_Chess
             return move;
         }
 
+        public Piece HandlePawnPromotion(Board board)
+        {
+            Piece chosenOption = null;
 
+            return chosenOption;
+        }
         public string GetCastlingMoves(Board board)
         {
             // castling is either from col e to col g ("king side) or col e to col c (queen side)
