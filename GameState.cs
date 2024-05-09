@@ -196,21 +196,28 @@ namespace Console_Chess
             string moves = "";
             // 2 helpers - get castle from the king side - e8g8 for black or e1h1 for white,
             // and queen side e8c8 for black and e1c1 for whites
+
             return moves;
         }
 
-        // for the 2 helpers - another helper in the isKingAndRookUnmoved
+        // helpers for the right to castle a certain way at any point from now in in the game
         private bool CanCastleKingSide(Board board)
         {
-            // turn player = true => white player => row is 7, otherwise 0
+            // turn player = true => white player => row is 7, otherwise 0. also used for the rook pos
             int KingRow = TurnPlayer ? 7 : 0;
             Position AssumedKingPos = new Position(KingRow, 4);
-            return true;
+            Position AssumedRookPos = new Position(KingRow, 7);
+            bool unMoved = IskingAndRookUnmoved(board, AssumedKingPos, AssumedRookPos);
+            return unMoved;
         }
 
         private bool CanCastleQueenSide(Board board)
         {
-            return true;
+            int KingRow = TurnPlayer ? 7 : 0;
+            Position AssumedKingPos = new Position(KingRow, 4);
+            Position AssumedRookPos = new Position(KingRow, 0);
+            bool unMoved = IskingAndRookUnmoved(board, AssumedKingPos, AssumedRookPos);
+            return unMoved;
         }
 
         private bool IskingAndRookUnmoved(Board board, Position kingPos, Position rookPos)
