@@ -65,7 +65,7 @@ namespace Console_Chess
 
         public void UpdateEnPassantPosition(Board board, Position EnPassantPos, Position enPassantPawnPosition)
         {
-            Console.WriteLine("en passant updated in position " + EnPassantPos);
+            //Console.WriteLine("en passant updated in position " + EnPassantPos);
             EnPassantPosition = EnPassantPos;
             if (EnPassantPos == null)
             {
@@ -129,9 +129,11 @@ namespace Console_Chess
                 {
                     Move playerMoveAsMove = Move.ConvertStringToMove(allPlayerMoves[moveCount]);
                     Board copy = board.Copy();
+                    GameState stateCopy = this.Copy();
                     // small test: 
                     //Console.WriteLine(board.ToString() == copy.ToString());
-                    NewGameLogicTest.ExecuteMove(copy, playerMoveAsMove);
+                    //NewGameLogicTest.ExecuteMove(copy, playerMoveAsMove);
+                    ChessGame.ExecuteMove(copy, playerMoveAsMove, stateCopy);
                     bool IsCopyCheck = IsPlayerInCheck(copy); // update 
                     if (IsCopyCheck == false)
                     {
@@ -197,6 +199,11 @@ namespace Console_Chess
         {
             // castling is either from col e to col g ("king side) or col e to col c (queen side)
             string moves = "";
+            // if a player is in check - return empty string:
+            if (IsPlayerInCheck(board))
+            {
+                return moves;
+            }
             // 2 helpers - get castle from the king side - e8g8 for black or e1g1 for white,
             // and queen side e8c8 for black and e1c1 for whites
             if (CanCastleKingSide(board))
@@ -220,8 +227,8 @@ namespace Console_Chess
             Position AssumedKingPos = new Position(KingRow, 4);
             Position AssumedRookPos = new Position(KingRow, 7);
             bool unMoved = IskingAndRookUnmoved(board, AssumedKingPos, AssumedRookPos);
-            bool IsSpacesBetweenKingAndRookEmpty = IsSpacesBetweenPositionsEmpty(board, AssumedKingPos, AssumedRookPos);
-            return unMoved && IsSpacesBetweenKingAndRookEmpty;
+            //bool IsSpacesBetweenKingAndRookEmpty = IsSpacesBetweenPositionsEmpty(board, AssumedKingPos, AssumedRookPos);
+            return unMoved && IsSpacesBetweenPositionsEmpty(board, AssumedKingPos, AssumedRookPos);
         }
 
         private bool CanCastleQueenSide(Board board)
@@ -230,8 +237,8 @@ namespace Console_Chess
             Position AssumedKingPos = new Position(KingRow, 4);
             Position AssumedRookPos = new Position(KingRow, 0);
             bool unMoved = IskingAndRookUnmoved(board, AssumedKingPos, AssumedRookPos);
-            bool IsSpacesBetweenKingAndRookEmpty = IsSpacesBetweenPositionsEmpty(board, AssumedKingPos, AssumedRookPos);
-            return unMoved && IsSpacesBetweenKingAndRookEmpty;
+            //bool IsSpacesBetweenKingAndRookEmpty = IsSpacesBetweenPositionsEmpty(board, AssumedKingPos, AssumedRookPos);
+            return unMoved && IsSpacesBetweenPositionsEmpty(board, AssumedKingPos, AssumedRookPos);
         }
 
         private bool IskingAndRookUnmoved(Board board, Position kingPos, Position rookPos)
@@ -255,10 +262,39 @@ namespace Console_Chess
             {
                 // if there is a non empty position -  return false
                 if (board.GetPositionPiece(nextPos) != null) return false;
+                // check if the current position is threatened - copy the board and check for IsPlayerInCheck
+                Board copy = board.Copy();
+                Piece copyKing = copy.RemovePiece(from);
+                copyKing.SetPiecePosition(nextPos);
+                copy.AddPiece(copyKing);
+                bool IsCopyCheck = IsPlayerInCheck(copy);
+                if (IsCopyCheck)
+                {
+                    return false;
+                }
 
                 nextPos = Direction.PositionAfterStepInDirection(nextPos,FromToDirection);
             }
             return true;
+        }
+
+        public GameState Copy()
+        {
+            GameState copy = new GameState();
+            copy.TurnPlayer = this.TurnPlayer; // 
+            copy.GameOver = this.GameOver; // is the game over
+            copy.IsCheck = this.IsCheck; // check for turn player
+            copy.TurnCount = this.TurnCount; //
+            copy.MovesList = this.MovesList;
+            copy.BoardHistoryFirstTime = this.BoardHistoryFirstTime;
+            copy.BoardHistorySecondTime = this.BoardHistorySecondTime;
+            copy.BoardHistoryThirdTime = this.BoardHistoryThirdTime;
+            copy.Result = this.Result;
+            copy.EnPassantPosition = this.EnPassantPosition;
+            copy.WestToEnpassantPawn = this.WestToEnpassantPawn;
+            copy.EastToEnpassantPawn = this.EastToEnpassantPawn;
+
+            return copy;
         }
         public void UpdateGameState(Board board)
         {
