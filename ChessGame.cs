@@ -296,11 +296,6 @@ namespace Console_Chess
             return board.AddPiece(pieceCopy); // change later to reset 50 move rule
         }
 
-        // function overloading - execute for copies without the 
-        public static bool ExecuteMove(Board board, Move move)
-        {
-            return true;
-        }
 
         public static void SendEnPassantToState(Board board, Piece piece, Move move, GameState state)
         {
