@@ -28,6 +28,7 @@ namespace Console_Chess.Tests
             , "g1h3", "g8h6", "h3g1", "h6g8"
             , "g1h3", "g8h6", "h3g1", "h6g8"
             , "g1h3", "g8h6", "h3g1", "h6g8"}; //
+            string[] FullGaryKasparovGame = { };
 
             string[] inputsOfChoice = null;
             switch (option)
@@ -59,6 +60,10 @@ namespace Console_Chess.Tests
                 case "7":
                     Console.WriteLine("running ThreeFoldInput WRONG simulation");
                     inputsOfChoice = ThreeFoldIncorrect;
+                    break;
+                case "8":
+                    Console.WriteLine("recreating Garry Kasparov VS Jorden van Forees");
+                    inputsOfChoice = FullGaryKasparovGame;
                     break;
                 default:
                     break;
