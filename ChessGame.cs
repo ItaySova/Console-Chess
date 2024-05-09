@@ -34,6 +34,8 @@ namespace Console_Chess
 
         public virtual void Play() // virtual for tests
         {
+            // remove later - log of moves for repeating in tests:
+            string movesLog = "";
             GameState state = new GameState();
             while (!state.GetGameOver())
             {
@@ -60,7 +62,7 @@ namespace Console_Chess
                         isMoveValid = Array.IndexOf(LegalMoves, playerMove.ToString()) != -1;
                     }
                 }
-                // add validation that the move doesnt leave a player in check
+                movesLog += playerMove.ToString() + ',';
 
                 // executing the input
                 ExecuteMove(board, playerMove,state);
@@ -72,6 +74,7 @@ namespace Console_Chess
                 TurnCount++;
             }
             Console.WriteLine("GAME OVER BY " + state.GetResult());
+            Console.WriteLine("moves log:\n" + movesLog);
         }
         public virtual Move UserInput() // virtual for tests
         {
@@ -224,6 +227,11 @@ namespace Console_Chess
                 return true;
             }
             return false;
+        }
+
+        public static bool IsMoveCastling(Board board, Move move, GameState state)
+        {
+            return true;
         }
         public static bool ExecuteMove(Board board, Move move, GameState state)
         {
