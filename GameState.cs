@@ -193,14 +193,24 @@ namespace Console_Chess
 
         public string GetCastlingMoves(Board board)
         {
+            // castling is either from col e to col g ("king side) or col e to col c (queen side)
             string moves = "";
-            // 2 helpers - get castle from the king side - e8g8 for black or e1h1 for white,
+            // 2 helpers - get castle from the king side - e8g8 for black or e1g1 for white,
             // and queen side e8c8 for black and e1c1 for whites
-
+            if (CanCastleKingSide(board))
+            {
+                moves += TurnPlayer ? "e1g1" : "e8g8";
+                moves += ',';
+            }
+            if (CanCastleQueenSide(board))
+            {
+                moves += TurnPlayer ? "e1c1" : "e8c8";
+                moves += ',';
+            }
             return moves;
         }
 
-        // helpers for the right to castle a certain way at any point from now in in the game
+        // helpers for the right to castle at the current moment
         private bool CanCastleKingSide(Board board)
         {
             // turn player = true => white player => row is 7, otherwise 0. also used for the rook pos
