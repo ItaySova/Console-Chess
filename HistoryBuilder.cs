@@ -13,10 +13,9 @@ namespace Console_Chess
             string Snapshot = "";
             // add board raw representation
             Snapshot += board.ToString();
-            // add castling rights for both players as KSW KSB - king side white, king side black
-            
-            // add castling rights for both players as QSW QSB - queen side white, queen side black
-
+            // add castling rights for both players as KSW KSB - king side white, king side black            
+            //  QSW QSB - queen side white, queen side black
+            Snapshot += CastlingRights(board, state);
             // add En Passant Position as tostring position or nothing 
             return Snapshot;
         }
@@ -51,6 +50,14 @@ namespace Console_Chess
                 whiteRights += "QSW";
             }
             return whiteRights + blackRights;
+        }
+
+        // add the current value of the en passant option - regardless if there is a pawn to catch it
+        public static string EnPassantRights(Board board, GameState state)
+        {
+            string EnpassantRights = "";
+
+            return EnpassantRights;
         }
     }
 }
