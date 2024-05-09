@@ -19,6 +19,7 @@ namespace Console_Chess.Tests
             string[] inputs = { "e2e4", "f7f5", "b1c3", "b8c6" ,"d1h5","g7g6","h5f5","g6f5"};
             string[] inputsForQuickCheckmate = { "e2e4", "f7f5", "d2d3", "g7g5", "d1h5"};
             string[] inputsForQuickBlackCheckMate = { "F2F4", "E7E5","G2G4","D8H4", "F4F5"};
+            string[] EnPassantInputs = { };
 
             string[] inputsOfChoice = null;
             switch (option)
