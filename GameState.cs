@@ -63,6 +63,11 @@ namespace Console_Chess
             return false;
         }
 
+        public Position GetEnPassantPosition()
+        {
+            return EnPassantPosition;
+        }
+
         public void UpdateEnPassantPosition(Board board, Position EnPassantPos, Position enPassantPawnPosition)
         {
             //Console.WriteLine("en passant updated in position " + EnPassantPos);
@@ -101,8 +106,14 @@ namespace Console_Chess
             return false;
         }
 
-        public void UpdateGameOver(Board board, string[] allPlayerMoves)
+        public void UpdateGameOver(string input)
         {
+            // if a player resigned on its own
+            if(input == "RESIGN")
+            {
+                GameOver = true;
+                Result = "Win by resign";
+            }
             // check if the player has any legal moves left to do
             // helper - get legal moves
         }
@@ -350,8 +361,13 @@ namespace Console_Chess
                     HandlePawnPromotion(board, CurrentPlayerPawns[i]);
                 }
             }
-
-
+            // update history from function
+            if (UpdateHistory(board))
+            {
+                GameOver = true;
+                ComputeResult("DRAW BY THREEFOLD REPETITION");
+                return;
+            }
             TurnPlayer = !TurnPlayer;
             // update if the player of the next turn is in check
             IsCheck = IsPlayerInCheck(board);
@@ -376,7 +392,7 @@ namespace Console_Chess
             MovesList = GetLegalMoves(board, PossibleMoves);
         }
 
-        // function that will return the position of the Piece that can be captured:
+        // function that will return the position of the Piece that can capture the en passant:
         public Position GetEnPassantCapturePosition()
         {
             if (WestToEnpassantPawn != null)
@@ -390,6 +406,29 @@ namespace Console_Chess
             return null;
         }
 
+        public bool UpdateHistory(Board board)
+        {
+            string HistorySnap = HistoryBuilder.SnapshotBoard(board,this);
+            if (BoardHistoryFirstTime.IndexOf(HistorySnap) == -1)
+            {
+                BoardHistoryFirstTime += HistorySnap + "|";
+            } else if(BoardHistorySecondTime.IndexOf(HistorySnap) == -1)
+            {
+                BoardHistorySecondTime += HistorySnap + "|";
+            } else
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public void ClearHistory()
+        {
+            BoardHistoryFirstTime = "";
+            BoardHistorySecondTime = "";
+        }
+
+        // overload for case of having no legal moves left
         public void ComputeResult()
         {
             // is called in the end of the turn - if the next player is in check - its a win for !player
@@ -401,6 +440,11 @@ namespace Console_Chess
             {
                 Result = "Stalemate";
             }
+        }
+
+        public void ComputeResult(string reason)
+        {
+            Result = reason;
         }
     }
 }
