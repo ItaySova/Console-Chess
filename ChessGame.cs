@@ -329,6 +329,29 @@ namespace Console_Chess
             }
         }
 
+        public virtual Move ValidateAutomationInput(string input)
+        {
+            bool isValid = false;
+            Move PlayerMove = null;
+            while (!isValid)
+            {
+                if (ValidateInput(input))
+                {
+                    PlayerMove = Move.ConvertStringToMove(input);
+                    Position FromPos = PlayerMove.GetFromPos();
+                    Piece Chosen = board.GetPositionPiece(FromPos);
+                    // validation for choosing a piece which belong to turns player and not an empty square
+                    isValid = Chosen != null && IsPieceBelongToPlayer(Chosen);
+                }
+                if (!isValid)
+                {
+                    Console.WriteLine("automation input invalid - please give input manually:");
+                    input = Console.ReadLine();
+                }
+            }
+            return PlayerMove;
+        }
+
     }
 }
 
