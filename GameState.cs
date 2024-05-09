@@ -306,12 +306,20 @@ namespace Console_Chess
             string[] PossibleMoves = GetAllPossibleMoves(board);
             // extract all the legal ones
             MovesList = GetLegalMoves(board, PossibleMoves);
+            // in this case no legal moves left - the game is over
             if(MovesList.Length == 1 && MovesList[0] == "")
             {
                 GameOver = true;
                 ComputeResult();
             }
             TurnCount++;
+        }
+
+        // update legal moves for the begining of play
+        public void UpdateMoveslist(Board board)
+        {
+            string[] PossibleMoves = GetAllPossibleMoves(board);
+            MovesList = GetLegalMoves(board, PossibleMoves);
         }
 
         // function that will return the position of the Piece that can be captured:
@@ -335,6 +343,9 @@ namespace Console_Chess
             {
                 Console.WriteLine("the player:" + (TurnPlayer ? "black" : "white") + " has won the match");
                 Result = "CHECKMATE";
+            } else
+            {
+                Result = "Stalemate";
             }
         }
     }
