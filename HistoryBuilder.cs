@@ -26,7 +26,30 @@ namespace Console_Chess
         {
             string whiteRights = "";
             string blackRights = "";
+            // black castling rights - init position for king is 0,4 and rooks in 0,7 & 0,0
+            bool IsKSB = state.IskingAndRookUnmoved(board, new Position(0, 4), new Position(0, 7));
+            bool IsQSB = state.IskingAndRookUnmoved(board, new Position(0, 4), new Position(0, 0));
+            if (IsKSB)
+            {
+                blackRights += "KSB";
+            }
+            if (IsQSB)
+            {
+                blackRights += "QSB";
+            }
 
+            bool IsKSW = state.IskingAndRookUnmoved(board, new Position(7, 4), new Position(7, 7));
+            bool IsQSW = state.IskingAndRookUnmoved(board, new Position(7, 4), new Position(7, 0));
+
+            if (IsKSW)
+            {
+                whiteRights += "KSW";
+            }
+
+            if (IsQSW)
+            {
+                whiteRights += "QSW";
+            }
             return whiteRights + blackRights;
         }
     }
