@@ -150,7 +150,9 @@ namespace Console_Chess
             string allPossibleMoves = board.GetAllMovesForPieces(allPlayerPieces);
             // append en passant manually if not null 
             string EnPassantMoves = GetEnpassantMoves(board);
+            string CastlingMoves = GetCastlingMoves(board);
             allPossibleMoves += "," + EnPassantMoves;
+            allPossibleMoves += "," + CastlingMoves;
             string[] movesArr = allPossibleMoves.Split(',');
             return movesArr;
         }
@@ -249,7 +251,7 @@ namespace Console_Chess
             // if the delta is negative - we step to the east - otherwise to the west
             Direction FromToDirection = ColDelta > 0 ? Direction.West : Direction.East;
             Position nextPos = Direction.PositionAfterStepInDirection(from, FromToDirection); // set next position
-            while (nextPos != to)
+            while (!nextPos.Equals(to))
             {
                 // if there is a non empty position -  return false
                 if (board.GetPositionPiece(nextPos) != null) return false;
