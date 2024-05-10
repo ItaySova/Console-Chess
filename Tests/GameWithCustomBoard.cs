@@ -64,5 +64,14 @@ namespace Console_Chess.Tests
             ChessGame game = new ChessGame(board);
             game.Play();
         }
+
+        public static void GameOfInsufficientMaterial()
+        {
+            Board board = new Board();
+            board.AddPiece(new King(false, new Position(0, 4)));
+            board.AddPiece(new King(true, new Position(7, 4)));
+            ChessGame game = new ChessGame(board);
+            game.Play();
+        }
     }
 }
