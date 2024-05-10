@@ -120,7 +120,7 @@ namespace Console_Chess.Tests
 
         public static void CustomDistrubute()
         {
-            Console.WriteLine("choose from the following Boards:\n1.Castling\n2.EnPassant\n3.PawnPromotion");
+            Console.WriteLine("choose from the following Boards:\n1.Castling\n2.EnPassant\n3.PawnPromotion\n4.insuffiecientMaterial King vs king and Knight");
             string option = Console.ReadLine();
             switch (option)
             {
@@ -132,6 +132,9 @@ namespace Console_Chess.Tests
                     break;
                 case "3":
                     GameWithCustomBoard.PawnPromotionBoard();
+                    break;
+                case "4":
+                    GameWithCustomBoard.GameOfInsufficientMaterial();
                     break;
                 default:
                     Console.WriteLine("not a valid option - starting a standart game: ");
