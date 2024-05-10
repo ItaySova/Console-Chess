@@ -70,6 +70,8 @@ namespace Console_Chess.Tests
             Board board = new Board();
             board.AddPiece(new King(false, new Position(0, 4)));
             board.AddPiece(new King(true, new Position(7, 4)));
+            board.AddPiece(new Bishop(false, new Position(6, 6)));
+            board.AddPiece(new Bishop(true, new Position(7, 7)));
             ChessGame game = new ChessGame(board);
             game.Play();
         }
