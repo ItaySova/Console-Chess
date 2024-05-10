@@ -29,7 +29,9 @@ namespace Console_Chess.Tests
             , "g1h3", "g8h6", "h3g1", "h6g8"
             , "g1h3", "g8h6", "h3g1", "h6g8"}; //
             string[] FullGaryKasparovGame = { "e2e4","e7e5","g1f3","b8c6","d2d4","e5d4","f3d4", "g8f6","d4c6","b7c6","e4e5", "d8e7"
-            , "d1e2", "f6d5", "c2c4", "e7b4","b1d2", "d5f4","e2e3", "f4g6"}; // stopped befor move 11 of kasparov 
+            , "d1e2", "f6d5", "c2c4", "e7b4","b1d2", "d5f4","e2e3", "f4g6","f1d3","f8c5","e3g3","e8g8" // castling here
+            , "e1g1" /*also castling*/, "d7d6", "d2b3", "g6e5", "a2a3", "b4b6", "b3b5", "b6c5", "c1e3","c5a5", "b2b4",
+            "a5a4", "e3d4"}; // started at 11 stopped befor move 12 of kasparov 
 
             string[] inputsOfChoice = null;
             switch (option)
@@ -108,7 +110,7 @@ namespace Console_Chess.Tests
                         isMoveValid = Array.IndexOf(LegalMoves, playerMove.ToString()) != -1;
                     }
                 }
-                Console.WriteLine("press enter to continue execute the input " + InputMoves[moveCounter]);
+                Console.WriteLine("press enter to continue execute move number " + moveCounter + " " + InputMoves[moveCounter]);
                 // executing the input
                 Console.ReadLine();
                 ExecuteMove(board, playerMove, state);
