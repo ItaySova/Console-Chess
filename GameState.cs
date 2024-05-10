@@ -513,6 +513,15 @@ namespace Console_Chess
 
         private bool IsKingAgainstKingAndKnight(Piece[] pieces)
         {
+            // if the list of pieces containing bishop the other piece is a king 
+            foreach (Piece p in pieces)
+            {
+                if (p != null && p is Knight)
+                {
+                    return true;
+                }
+            }
+
             return false;
         }
 
