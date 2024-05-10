@@ -452,6 +452,12 @@ namespace Console_Chess
             return TurnCount == 50;
         }
 
+        public bool IsInsufficientMaterial(Board board)
+        {
+            // use a couple of helper functions:
+            return false;
+        }
+
         // overload for case of having no legal moves left
         public void ComputeResult()
         {
