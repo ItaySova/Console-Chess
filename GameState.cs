@@ -454,36 +454,60 @@ namespace Console_Chess
 
         public bool IsInsufficientMaterial(Board board)
         {
-            int piecesCount = 0;
+            // if there is 1 pirece for any player in any given time - it must be the king 
+            // otherwise a checkmate would occur
             Piece[] CurrnetPlayerPieces = board.GetAllPiecesForPlayer(TurnPlayer);
             Piece[] oponentPlayerPieces = board.GetAllPiecesForPlayer(TurnPlayer);
-            bool KVSK = IsKingVsKing(CurrnetPlayerPieces, oponentPlayerPieces);
-            // use a couple of helper functions:
-            return KVSK;
-        }
-
-        private bool IsKingVsKing(Piece[] CurrentPieces, Piece[] OpponentPieces)
-        {
             int CurrentPiecesCount = 0;
             int OpponentPiecesCount = 0;
 
-            for(int i = 0;i< CurrentPieces.Length; i++)
+            for (int i = 0; i < CurrnetPlayerPieces.Length; i++)
             {
-                if (CurrentPieces[i] != null)
+                if (CurrnetPlayerPieces[i] != null)
                 {
                     CurrentPiecesCount++;
                 }
-                if (OpponentPieces[i] != null)
+                if (oponentPlayerPieces[i] != null)
                 {
                     OpponentPiecesCount++;
                 }
             }
 
-            return CurrentPiecesCount == 1 && OpponentPiecesCount == 1;
+
+            bool KVSK = IsKingVsKing(CurrentPiecesCount, OpponentPiecesCount);
+            bool KVSKB = false;
+            if(CurrentPiecesCount == 1 && OpponentPiecesCount == 2)
+            {
+                KVSKB =IsKingAgainstKingAndBishop(oponentPlayerPieces);
+            } else if (CurrentPiecesCount == 2 && OpponentPiecesCount == 1)
+            {
+                KVSKB = IsKingAgainstKingAndBishop(CurrnetPlayerPieces);
+            }
+
+                // use a couple of helper functions:
+                return KVSK || KVSKB;
         }
 
-        private bool IsKingAgainstKingAndBishop()
+        private bool IsKingVsKing(int CurrentCount, int OpponentCount)
         {
+            // if there is one piece per player it must be the kings from the rules of the game
+            // (checkmate will occure if the king cant avoid capture) 
+            return CurrentCount == 1 && OpponentCount == 1;
+        }
+        
+        // will check in the list that contain more than 1 piece if it contain only king and bishop
+        // this function is called only if 1 list contain 2 pieces and the other 1
+        private bool IsKingAgainstKingAndBishop(Piece[] pieces)
+        {
+            // if the list of pieces containing bishop the other piece is a king 
+            foreach(Piece p in pieces)
+            {
+                if(p != null && p is Bishop)
+                {
+                    return true;
+                }
+            }
+
             return false;
         }
 
