@@ -113,9 +113,15 @@ namespace Console_Chess.Tests
                         isMoveValid = Array.IndexOf(LegalMoves, playerMove.ToString()) != -1;
                     }
                 }
-                Console.WriteLine("press enter to continue execute move number " + moveCounter + " " + InputMoves[moveCounter]);
-                // executing the input
-                Console.ReadLine();
+                if (SkipNext3Turns)
+                {
+                    Console.WriteLine("execute move number {0}: {1}", moveCounter, InputMoves[moveCounter]);
+                }else
+                {
+                    Console.WriteLine("press enter to continue execute move number " + moveCounter + " " + InputMoves[moveCounter]);                    
+                    Console.ReadLine();
+                }
+                
                 ExecuteMove(board, playerMove, state);
 
                 // change the turn player and incrementing turn count:
