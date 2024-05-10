@@ -36,7 +36,10 @@ namespace Console_Chess.Tests
             "b3e3" /*check*/, "g1h1", "g8h8", "f1e1", "e3c3","c6c7","a8c8", "c7a7", "c8c4", "h2h3", "c4f4",
             "a7c5", "c3b2","c5e5", "b2b3", "e5e3", "b3c4", "a1c1", "c4f7", "e3g3", "h7h6","b4b5","f7d5", "a3a4",
             "f4a4", "c1b1", "f8f5","b5b6", "f5g5","b6b7", "d5b7", "g3g5"}; // started at 11 stopped befor move 32 of kasparov 
-            string[] FiftyRulesInputs = { };
+            string[] FiftyRulesInputs = { "e2e4", "e7e6", "f1e2", "f8e7", "e2f1", "e7f6", "f1d3", "f6e7", "d3c4", "e7f8", "c4d3",
+                "d8f6", "g1h3", "f8d6", "e1g1", "d6a3", "b1c3", "g8h6", "g1h1", "e8g8", "h1g1", "a3b4", "c3b1", "b4c5", "d1e1", "g8h8", "e1e2", "h8g8",
+                "e2e3", "b8a6", "e3f3", "f8e8", "f3g3", "c5b6", "g1h1", "b6a5", "g3f4", "a5b6", "f4e5", "g8h8", "e5d4", "h6g8", "b1a3", "f6h6", "a3c4",
+                "h6h5", "h3g1", "a6b8", "f1d1", "h5h4", "d1e1", "h4h3", };
 
             string[] inputsOfChoice = null;
             switch (option)
@@ -75,6 +78,10 @@ namespace Console_Chess.Tests
                 case "9":
                     Console.WriteLine("recreating Garry Kasparov VS Jorden van Forees");
                     inputsOfChoice = FullGaryKasparovGame;
+                    break;
+                case "10":
+                    Console.WriteLine("running the fifty moves rule inputs");
+                    inputsOfChoice = FiftyRulesInputs;
                     break;
                 default:
                     break;
