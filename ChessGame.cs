@@ -37,6 +37,7 @@ namespace Console_Chess
             // remove later - log of moves for repeating in tests:
             string movesLog = "";
             GameState state = new GameState();
+            state.UpdateMoveslist(board);
             while (!state.GetGameOver())
             {
                 string[] MovesAvailable = state.GetAllPossibleMoves(board);
@@ -44,6 +45,8 @@ namespace Console_Chess
                 board.Print();
                 Console.WriteLine(state.GetCheckStatus() ? "CHECK" : "");
                 string[] LegalMoves = state.GetLegalMoves(board, MovesAvailable);
+                // check if the moves int the gamestate is identical to the legal moves done manually"
+                Console.WriteLine("manuall legal moves == state.getMoves: " + (state.GetMovesList().ToString() == LegalMoves.ToString()));
                 bool isMoveValid = false;
                 Move playerMove = null;
                 // taking user input
@@ -249,7 +252,7 @@ namespace Console_Chess
         public static bool IsMoveCastling(Board board, Move move)
         {
             // will get the move and return if its castling of any type 
-            
+            // make sure that the origin position of the move contains a king:
             return move.ToString() == "e1g1" || move.ToString() == "e1c1" ||
                 move.ToString() == "e8g8" || move.ToString() == "e8c8";
         }
@@ -306,9 +309,10 @@ namespace Console_Chess
             }
 
             // check if a move is castling
-            if (IsMoveCastling(board, move))
+            if (IsMoveCastling(board, move) && pieceCopy is King)
             {
                 //Console.WriteLine("castling execute: " + move.ToString());
+
                 SetCastlingRook(board, move);
             }
                         
