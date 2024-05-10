@@ -45,6 +45,11 @@ namespace Console_Chess
         {
             TurnCount = number;
         }
+
+        public int GetTurnCount()
+        {
+            return TurnCount;
+        }
         public bool IsPlayerInCheck(Board board)
         {
             // get all opponent pieces
@@ -365,7 +370,7 @@ namespace Console_Chess
                     HandlePawnPromotion(board, CurrentPlayerPawns[i]);
                 }
             }
-            // update history from function
+            // update history from function - check for threefoldrepetition
             if (UpdateHistory(board))
             {
                 GameOver = true;
@@ -386,7 +391,7 @@ namespace Console_Chess
                 GameOver = true;
                 ComputeResult();
             }
-            if(TurnCount == 50)
+            if(IsFiftyMovesRule())
             {
                 GameOver = true;
                 ComputeResult("Fifty-Moves-Rule");
@@ -399,6 +404,11 @@ namespace Console_Chess
         {
             string[] PossibleMoves = GetAllPossibleMoves(board);
             MovesList = GetLegalMoves(board, PossibleMoves);
+        }
+
+        public string[] GetMovesList()
+        {
+            return MovesList;
         }
 
         // function that will return the position of the Piece that can capture the en passant:
