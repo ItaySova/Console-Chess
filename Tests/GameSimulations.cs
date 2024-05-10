@@ -83,6 +83,8 @@ namespace Console_Chess.Tests
                     Console.WriteLine("running the fifty moves rule inputs");
                     inputsOfChoice = FiftyRulesInputs;
                     break;
+                case "11":
+                    break;
                 default:
                     break;
             }
