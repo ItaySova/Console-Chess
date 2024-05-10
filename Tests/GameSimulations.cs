@@ -31,9 +31,10 @@ namespace Console_Chess.Tests
             , "g1h3", "g8h6", "h3g1", "h6g8"}; //
             string[] FullGaryKasparovGame = { "e2e4","e7e5","g1f3","b8c6","d2d4","e5d4","f3d4", "g8f6","d4c6","b7c6","e4e5", "d8e7"
             , "d1e2", "f6d5", "c2c4", "e7b4","b1d2", "d5f4","e2e3", "f4g6","f1d3","f8c5","e3g3","e8g8" // castling here
-            , "e1g1" /*also castling*/, "d7d6", "d2b3", "g6e5", "a2a3", "b4b6", "b3b5", "b6c5", "c1e3","c5a5", "b2b4",
-            "a5a4", "e3d4", "f7f6", "d4e5","f6e5","f2f4","c8f5", "f6e5", "f5d3", "g3d3", "d6e5", "d3d7", "a4b3","d7c6",
-            "b3e3" /*check*/, "g1h1"}; // started at 11 stopped befor move 20 of kasparov 
+            , "e1g1" /*also castling*/, "d7d6", "d2b3", "g6e5", "a2a3", "b4b6", "b3c5", "b6c5", "c1e3","c5a5", "b2b4",
+            "a5a4", "e3d4", "f7f6", "d4e5","f6e5","f2f4","c8f5", "f4e5", /*last tested point*/
+                "f5d3", "g3d3", "d6e5", "d3d7", "a4b3","d7c6",
+            "b3e3" /*check*/, "g1h1"}; // started at 11 stopped befor move 26 of kasparov 
 
             string[] inputsOfChoice = null;
             switch (option)
@@ -97,6 +98,18 @@ namespace Console_Chess.Tests
                 string[] LegalMoves = state.GetLegalMoves(board, MovesAvailable);
                 bool isMoveValid = false;
                 Move playerMove = null;
+
+                if (SkipNext3Turns)
+                {
+                    Console.WriteLine("execute move number {0}: {1}", moveCounter, InputMoves[moveCounter]);
+                    SkipNext3Turns = !(moveCounter == 50); // for testing purposes skip to the last time the board was correct
+                }
+                else
+                {
+                    Console.WriteLine("press enter to continue execute move number " + moveCounter + " " + InputMoves[moveCounter]);
+                    Console.ReadLine();
+                }
+
                 // taking user input
                 while (!isMoveValid)
                 {
@@ -104,8 +117,8 @@ namespace Console_Chess.Tests
                     isMoveValid = Array.IndexOf(MovesAvailable, playerMove.ToString()) != -1;
                     if (!isMoveValid)
                     {
-                        Console.WriteLine("move is not valid - try again");
-                        isMoveValid = IsMoveInAllPlayerMoves(playerMove);
+                        Console.WriteLine("move {0} is not valid - try again", playerMove.ToString());
+                        Console.ReadLine();
                     }
                     if (isMoveValid)
                     {
@@ -113,14 +126,7 @@ namespace Console_Chess.Tests
                         isMoveValid = Array.IndexOf(LegalMoves, playerMove.ToString()) != -1;
                     }
                 }
-                if (SkipNext3Turns)
-                {
-                    Console.WriteLine("execute move number {0}: {1}", moveCounter, InputMoves[moveCounter]);
-                }else
-                {
-                    Console.WriteLine("press enter to continue execute move number " + moveCounter + " " + InputMoves[moveCounter]);                    
-                    Console.ReadLine();
-                }
+                
                 
                 ExecuteMove(board, playerMove, state);
 
