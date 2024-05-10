@@ -454,7 +454,16 @@ namespace Console_Chess
 
         public bool IsInsufficientMaterial(Board board)
         {
+            int piecesCount = 0;
+            Piece[] CurrnetPlayerPieces = board.GetAllPiecesForPlayer(TurnPlayer);
+            Piece[] oponentPlayerPieces = board.GetAllPiecesForPlayer(TurnPlayer);
+            bool KVSK = IsKingVsKing(CurrnetPlayerPieces, oponentPlayerPieces);
             // use a couple of helper functions:
+            return KVSK;
+        }
+
+        private bool IsKingVsKing(Piece[] CurrentPieces, Piece[] OpponentPieces)
+        {
             return false;
         }
 
