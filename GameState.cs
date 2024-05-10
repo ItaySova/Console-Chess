@@ -464,6 +464,26 @@ namespace Console_Chess
 
         private bool IsKingVsKing(Piece[] CurrentPieces, Piece[] OpponentPieces)
         {
+            int CurrentPiecesCount = 0;
+            int OpponentPiecesCount = 0;
+
+            for(int i = 0;i< CurrentPieces.Length; i++)
+            {
+                if (CurrentPieces[i] != null)
+                {
+                    CurrentPiecesCount++;
+                }
+                if (OpponentPieces[i] != null)
+                {
+                    OpponentPiecesCount++;
+                }
+            }
+
+            return CurrentPiecesCount == 1 && OpponentPiecesCount == 1;
+        }
+
+        private bool IsKingAgainstKingAndBishop()
+        {
             return false;
         }
 
