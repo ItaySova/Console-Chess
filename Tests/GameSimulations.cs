@@ -1,6 +1,7 @@
 ﻿using Console_Chess.Pieces;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,7 +32,8 @@ namespace Console_Chess.Tests
             string[] FullGaryKasparovGame = { "e2e4","e7e5","g1f3","b8c6","d2d4","e5d4","f3d4", "g8f6","d4c6","b7c6","e4e5", "d8e7"
             , "d1e2", "f6d5", "c2c4", "e7b4","b1d2", "d5f4","e2e3", "f4g6","f1d3","f8c5","e3g3","e8g8" // castling here
             , "e1g1" /*also castling*/, "d7d6", "d2b3", "g6e5", "a2a3", "b4b6", "b3b5", "b6c5", "c1e3","c5a5", "b2b4",
-            "a5a4", "e3d4"}; // started at 11 stopped befor move 12 of kasparov 
+            "a5a4", "e3d4", "f7f6", "d4e5","f6e5","f2f4","c8f5", "f6e5", "f5d3", "g3d3", "d6e5", "d3d7", "a4b3","d7c6",
+            "b3e3" /*check*/, "g1h1"}; // started at 11 stopped befor move 20 of kasparov 
 
             string[] inputsOfChoice = null;
             switch (option)
@@ -85,6 +87,7 @@ namespace Console_Chess.Tests
         {
             GameState state = new GameState();
             int moveCounter = 0;
+            bool SkipNext3Turns = GameSimulations.SkipNext3Turns();
             while (!state.GetGameOver())
             {
                 string[] MovesAvailable = state.GetAllPossibleMoves(board);
@@ -233,30 +236,12 @@ namespace Console_Chess.Tests
             return PlayerMove;
         }
 
-        /*public Move ValidateAutomationInput(string input)
+        public static bool SkipNext3Turns()
         {
-            Board testBoard = GetBoard();
-            bool Player = GetTurnPlayer();
-            bool isValid = false;
-            Move PlayerMove = null;
-            while (!isValid)
-            {
-                if (ValidateInput(input))
-                {
-                    PlayerMove = ConvertInputToMove(input);
-                    Position FromPos = PlayerMove.GetFromPos();
-                    Piece Chosen = testBoard.GetPositionPiece(FromPos);
-                    // validation for choosing a piece which belong to turns player and not an empty square
-                    isValid = Chosen != null && IsPieceBelongToPlayer(Chosen);
-                }
-                if (!isValid)
-                {
-                    Console.WriteLine("automation input invalid - please give input manually:");
-                    input = Console.ReadLine();
-                }                
-            }
-            return PlayerMove;
-        }*/
+            Console.WriteLine("would you like to skip the next 3 turnes? enter y for yes");
+            string input = Console.ReadLine();
+            return input == "y" || input == "Y";
+        }
 
         public void changeMoveIfNotInMovesList(string[] inputs, int counter)
         {
