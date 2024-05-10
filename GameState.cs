@@ -396,6 +396,13 @@ namespace Console_Chess
                 GameOver = true;
                 ComputeResult("Fifty-Moves-Rule");
             }
+
+            // checking for insufficient material
+            if (IsInsufficientMaterial(board))
+            {
+                GameOver = true;
+                ComputeResult("Insufficient material");
+            }
             TurnCount++;
         }
 
@@ -484,8 +491,18 @@ namespace Console_Chess
                 KVSKB = IsKingAgainstKingAndBishop(CurrnetPlayerPieces);
             }
 
-                // use a couple of helper functions:
-                return KVSK || KVSKB;
+            bool KVSKN = false;
+            if (CurrentPiecesCount == 1 && OpponentPiecesCount == 2)
+            {
+                KVSKN = IsKingAgainstKingAndKnight(oponentPlayerPieces);
+            }
+            else if (CurrentPiecesCount == 2 && OpponentPiecesCount == 1)
+            {
+                KVSKN = IsKingAgainstKingAndKnight(CurrnetPlayerPieces);
+            }
+            // IsKingAgainstKingAndKnight
+            // use a couple of helper functions:
+            return KVSK || KVSKB || KVSKN;
         }
 
         private bool IsKingVsKing(int CurrentCount, int OpponentCount)
