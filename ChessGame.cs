@@ -47,6 +47,7 @@ namespace Console_Chess
                 string[] LegalMoves = state.GetLegalMoves(board, MovesAvailable);
                 // check if the moves int the gamestate is identical to the legal moves done manually"
                 Console.WriteLine("manuall legal moves == state.getMoves: " + (state.GetMovesList().ToString() == LegalMoves.ToString()));
+                Console.WriteLine("turn number: " + state.GetTurnCount());
                 bool isMoveValid = false;
                 Move playerMove = null;
                 // taking user input
