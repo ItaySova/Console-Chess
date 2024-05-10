@@ -511,6 +511,11 @@ namespace Console_Chess
             return false;
         }
 
+        private bool IsKingAgainstKingAndKnight(Piece[] pieces)
+        {
+            return false;
+        }
+
         // overload for case of having no legal moves left
         public void ComputeResult()
         {
