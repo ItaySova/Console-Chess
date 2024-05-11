@@ -40,7 +40,13 @@ namespace Console_Chess.Tests
                 "d8f6", "g1h3", "f8d6", "e1g1", "d6a3", "b1c3", "g8h6", "g1h1", "e8g8", "h1g1", "a3b4", "c3b1", "b4c5", "d1e1", "g8h8", "e1e2", "h8g8",
                 "e2e3", "b8a6", "e3f3", "f8e8", "f3g3", "c5b6", "g1h1", "b6a5", "g3f4", "a5b6", "f4e5", "g8h8", "e5d4", "h6g8", "b1a3", "f6h6", "a3c4",
                 "h6h5", "h3g1", "a6b8", "f1d1", "h5h4", "d1e1", "h4h3", };
-
+            string[] fullMagnusCarlsenVSLoekVanWely = {"e2e4","c7c5", "g1f3", "e7e6", "d2d4","c5d4", "f3d4", "a7a6", "b1c3", "d8c7", "f1d3", "g8f6",
+                "e1g1" /*castling*/ ,"f8c5", "d4b3","c5e7", "f2f4", "d7d6", "a2a4", "b8c6", "a4a5", "b7b5", "a5b6" /*en passant capture*/,"c7b6" /*check*/,
+                "g1h1", "e8g8" /*castling*/, "d1e2", "a6a5", "c1e3", "b6c7", "c3b5", "c7b8", "c2c3", "d6d5" /*move number 18*/,"e4e5","f6e4", "d3e4",
+                "d5e4", "b3c5", "e7c5", "e3c5", "c8a6", "c3c4", "f8d8", "b5d6","f7f5", "e5f6" /*en passant capture*/,"d8d6", "e2e4", "a6b7",
+                "c5d6", "b8d6", "a1d1", "c6d8", "f6f7" /*check*/, "g8f7", "e4h7", "d6c6", "f1f2", "c6e4", "f4f5","e6e5","f2d2", "b7c6" ,
+                "h7g6" /*check*/,"f7e7", "d2d7"};
+                
             string[] inputsOfChoice = null;
             switch (option)
             {
@@ -84,10 +90,13 @@ namespace Console_Chess.Tests
                     inputsOfChoice = FiftyRulesInputs;
                     break;
                 case "11":
+                    Console.WriteLine("recreating MagnusCarlsenVSLoekVanWely ");
+                    inputsOfChoice = fullMagnusCarlsenVSLoekVanWely;
                     break;
                 default:
                     break;
             }
+            
             ChessGame simu = new GameSimulations();
             simu.GameSimulation(inputsOfChoice);
             //testGame.GameSimulation(inputsOfChoice);
