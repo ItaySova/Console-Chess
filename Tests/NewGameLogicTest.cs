@@ -72,9 +72,12 @@ namespace Console_Chess.Tests
                 // is Check test - will be complete gamestate check later 
                 
                 Console.WriteLine(state.GetCheckStatus() ? "CHECK":"");
-                string[] LegalMoves = state.GetLegalMoves(board, MovesAvailable);
+
+                // remove in the end:
+                /*string[] LegalMoves = state.GetLegalMoves(board, MovesAvailable);
                 Console.WriteLine("is legal == possible " + IsLegalMovesEqualPossible(state.GetMovesList(), LegalMoves));
-                Console.WriteLine(LegalMoves.Length + " legal moves available");
+                Console.WriteLine(LegalMoves.Length + " legal moves available");*/
+
                 bool isMoveValid = false;
                 Move playerMove = null;
                 // taking user input
@@ -93,13 +96,7 @@ namespace Console_Chess.Tests
                     if (!isMoveValid)
                     {
                         Console.WriteLine("move is not valid - try again");
-                        //isMoveValid = IsMoveInAllPlayerMoves(playerMove);
-                    }
-                    /*if (isMoveValid)
-                    {
-                        Console.WriteLine("move is in all possible - check for legal moves");
-                        isMoveValid = Array.IndexOf(LegalMoves, playerMove.ToString()) != -1;
-                    }*/
+                    }                    
                 }             
 
                 if(playerMove == null)
@@ -122,21 +119,6 @@ namespace Console_Chess.Tests
             {
                 Console.WriteLine("the {0} player won!", (TurnPlayer?"black":"white"));
             }
-        }
-
-        public static bool ExecuteMove(Board board, Move move)
-        {
-            if (move == null)
-            {
-                Console.WriteLine("got empty move");
-                return false;
-            }
-            Piece pieceCopy = board.RemovePiece(move.GetFromPos());
-            Piece ToPosCopy = board.RemovePiece(move.GetToPosition());
-            pieceCopy.SetPiecePosition(move.GetToPosition());
-            pieceCopy.SetHasMoved(true);
-
-            return board.AddPiece(pieceCopy); // change later to reset 50 move rule
         }
 
         private bool IsLegalMovesEqualPossible(string[] possibleMoves, string[] legalMoves)
