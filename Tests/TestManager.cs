@@ -94,7 +94,7 @@ namespace Console_Chess.Tests
         public static void SimulationDestribute()
         {
             Console.WriteLine("which simulation to run? \n1.random simulation\n2.quick checkmate\n3.inputsForQuickBlackCheckMate" +
-                "\n4.EnPassantInputs\n5.CastlingInputs\n6.PawnPromotionInputs\n7.ThreeFoldInput\n8.ThreeFoldInput second\n9." +
+                "\n4.EnPassantInputs\n5.stalemateInputs\n6.PawnPromotionInputs\n7.ThreeFoldInput\n8.ThreeFoldInput second\n9." +
                 "Garry Kasparov VS Jorden van Forees\n10.fifty-moves-rule\n11.MagnusCarlsen VS Loek Van Wely");
             string simulation = Console.ReadLine();
             switch (simulation)
