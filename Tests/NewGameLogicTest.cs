@@ -45,6 +45,7 @@ namespace Console_Chess.Tests
         public override void Play()
         {
             GameState state = new GameState();
+            DisplayRules();
             state.UpdateMoveslist(board);
             while (!state.GetGameOver())
             {
@@ -70,15 +71,23 @@ namespace Console_Chess.Tests
                 // is Check test - will be complete gamestate check later 
                 
                 Console.WriteLine(state.GetCheckStatus() ? "CHECK":"");
-                /*string[] LegalMoves = state.GetLegalMoves(board, MovesAvailable);
-                Console.WriteLine("is legal == possible " + IsLegalMovesEqualPossible(MovesAvailable, LegalMoves));
-                Console.WriteLine(LegalMoves.Length + " legal moves available");*/
+                string[] LegalMoves = state.GetLegalMoves(board, MovesAvailable);
+                Console.WriteLine("is legal == possible " + IsLegalMovesEqualPossible(state.GetMovesList(), LegalMoves));
+                Console.WriteLine(LegalMoves.Length + " legal moves available");
                 bool isMoveValid = false;
                 Move playerMove = null;
                 // taking user input
                 while (!isMoveValid)
                 {
                     playerMove = UserInput();
+
+                    if (playerMove == null)
+                    {
+                        // means player resigned
+                        state.UpdateGameOver("RESIGN");
+                        break;
+                    }
+
                     isMoveValid = Array.IndexOf(state.GetMovesList(), playerMove.ToString()) != -1;
                     if (!isMoveValid)
                     {
@@ -92,6 +101,11 @@ namespace Console_Chess.Tests
                     }*/
                 }             
 
+                if(playerMove == null)
+                {
+                    continue;
+                }
+
                 // executing the input
                 ExecuteMove(board, playerMove, state);
 
@@ -100,6 +114,7 @@ namespace Console_Chess.Tests
                 TurnPlayer = state.GetPlayer();
                 TurnCount = state.GetTurnCount();
             };
+            board.Print();
             Console.WriteLine("GAME OVER BY " + state.GetResult());
         }
 
@@ -134,5 +149,6 @@ namespace Console_Chess.Tests
             }
             return true;
         }
+
     }
 }
