@@ -121,7 +121,7 @@ namespace Console_Chess
             if(input == "RESIGN")
             {
                 GameOver = true;
-                Result = "Win by resign";
+                Result = "RESIGN";
             }
             // check if the player has any legal moves left to do
             // helper - get legal moves
@@ -545,10 +545,9 @@ namespace Console_Chess
         // overload for case of having no legal moves left
         public void ComputeResult()
         {
-            // is called in the end of the turn - if the next player is in check - its a win for !player
+            // is called in the end of the turn if the next player has no moves- if the next player is in check - its a win for !player
             if (IsCheck)
-            {
-                Console.WriteLine("the player:" + (TurnPlayer ? "black" : "white") + " has won the match");
+            {                
                 Result = "CHECKMATE";
             } else
             {
