@@ -44,6 +44,7 @@ namespace Console_Chess.Tests
 
         public override void Play()
         {
+            Console.WriteLine("playing from new logic design");
             GameState state = new GameState();
             DisplayRules();
             state.UpdateMoveslist(board);
@@ -115,7 +116,12 @@ namespace Console_Chess.Tests
                 TurnCount = state.GetTurnCount();
             };
             board.Print();
-            Console.WriteLine("GAME OVER BY " + state.GetResult());
+            string res = state.GetResult();
+            Console.WriteLine("GAME OVER BY " + res);
+            if (res == "CHECKMATE")
+            {
+                Console.WriteLine("the {0} player won!", (TurnPlayer?"black":"white"));
+            }
         }
 
         public static bool ExecuteMove(Board board, Move move)
