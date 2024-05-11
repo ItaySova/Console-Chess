@@ -404,33 +404,61 @@ namespace Console_Chess
 
 
 /* old play funciotn:
- *         public virtual void Play() // virtual for tests
-        {
-            while (!IsGameOver)
+  
+            // remove later - log of moves for repeating in tests:
+            string movesLog = "";
+            GameState state = new GameState();
+            state.UpdateMoveslist(board);
+            while (!state.GetGameOver())
             {
+                string[] MovesAvailable = state.GetAllPossibleMoves(board);
                 // printing
                 board.Print();
-
+                Console.WriteLine(state.GetCheckStatus() ? "CHECK" : "");
+                string[] LegalMoves = state.GetLegalMoves(board, MovesAvailable);
+                // check if the moves int the gamestate is identical to the legal moves done manually"
+                Console.WriteLine("manuall legal moves == state.getMoves: " + (state.GetMovesList().ToString() == LegalMoves.ToString()));
+                Console.WriteLine("turn number: " + state.GetTurnCount());
+                bool isMoveValid = false;
+                Move playerMove = null;
                 // taking user input
-                Move playerMove = UserInput();
-                Console.WriteLine(playerMove.ToString());
-
-                // testing the input for valid input - rulewise
-                bool isMoveValid = IsMoveInAllPlayerMoves(playerMove);
-                if (!isMoveValid)
+                while (!isMoveValid)
                 {
-                    Console.WriteLine("move is not in all moves list - try again");
+                    playerMove = UserInput();
+                    if(playerMove == null)
+                    {
+                        // means player resigned
+                        state.UpdateGameOver("RESIGN");
+                        break;
+                    }
+
+                    isMoveValid = Array.IndexOf(MovesAvailable, playerMove.ToString()) != -1;
+                    if (!isMoveValid)
+                    {
+                        Console.WriteLine("move is not valid - try again");
+                        isMoveValid = IsMoveInAllPlayerMoves(playerMove);
+                    }
+                    if (isMoveValid)
+                    {
+                        Console.WriteLine("move is in all possible - check for legal moves");
+                        isMoveValid = Array.IndexOf(LegalMoves, playerMove.ToString()) != -1;
+                    }
+                }
+                if(playerMove == null)
+                {
                     continue;
                 }
-                // add validation that the move doesnt leave a player in check
+                movesLog += playerMove.ToString() + ',';
 
                 // executing the input
-                ExecuteMove(playerMove);
+                ExecuteMove(board, playerMove,state);
 
                 // change the turn player and incrementing turn count:
-                TurnPlayer = !TurnPlayer;
+                state.UpdateGameState(board);
+                TurnPlayer = state.GetPlayer();
+                //TurnPlayer = !TurnPlayer;
                 TurnCount++;
             }
-        }
- 
+            Console.WriteLine("GAME OVER BY " + state.GetResult());
+            Console.WriteLine("moves log:\n" + movesLog);
  */
