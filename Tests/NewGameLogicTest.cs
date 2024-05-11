@@ -177,10 +177,11 @@ namespace Console_Chess.Tests
                     Piece Chosen = board.GetPositionPiece(FromPos);
                     // validation for choosing a piece which belong to turns player and not an empty square
                     isValid = Chosen != null && IsPieceBelongToPlayer(Chosen);
-                }
-                // massage for invalid move - 
-                if (!isValid)
-                    Console.WriteLine("failed input validation check - either the from spot is empty or contains enemt piece:");
+                    if (!isValid)
+                    {
+                        HandleInvalidInput(Chosen);
+                    }
+                }                                    
             }
             return PlayerMove;
         }
