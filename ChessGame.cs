@@ -121,6 +121,18 @@ namespace Console_Chess
             return PlayerMove;
         }
 
+        // function to be called only on invalid input
+        public void HandleInvalidInput(Piece chosenPiece)
+        {
+            if (chosenPiece == null)
+            {
+                Console.WriteLine("the spot chosen int the start of the move is an empty spoy");
+            } else
+            {
+                Console.WriteLine("the piece chosen is not the current player Piece");
+            }
+        }
+
         public bool ValidateInput(string input) // validate that the input itself is valid in regard to form (a-Z,1-8,a-Z,1-8)
         {
             // valid move input is A2A3 - 4 chars when 1,3 positions are numbers and 0,2 are letters
