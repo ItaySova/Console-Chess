@@ -45,6 +45,7 @@ namespace Console_Chess.Tests
         public override void Play()
         {
             GameState state = new GameState();
+            state.UpdateMoveslist(board);
             while (!state.GetGameOver())
             {
 
@@ -69,29 +70,27 @@ namespace Console_Chess.Tests
                 // is Check test - will be complete gamestate check later 
                 
                 Console.WriteLine(state.GetCheckStatus() ? "CHECK":"");
-                string[] LegalMoves = state.GetLegalMoves(board, MovesAvailable);
+                /*string[] LegalMoves = state.GetLegalMoves(board, MovesAvailable);
                 Console.WriteLine("is legal == possible " + IsLegalMovesEqualPossible(MovesAvailable, LegalMoves));
-                Console.WriteLine(LegalMoves.Length + " legal moves available");
+                Console.WriteLine(LegalMoves.Length + " legal moves available");*/
                 bool isMoveValid = false;
                 Move playerMove = null;
                 // taking user input
                 while (!isMoveValid)
                 {
                     playerMove = UserInput();
-                    isMoveValid = Array.IndexOf(MovesAvailable, playerMove.ToString()) != -1;
+                    isMoveValid = Array.IndexOf(state.GetMovesList(), playerMove.ToString()) != -1;
                     if (!isMoveValid)
                     {
                         Console.WriteLine("move is not valid - try again");
-                        isMoveValid = IsMoveInAllPlayerMoves(playerMove);
+                        //isMoveValid = IsMoveInAllPlayerMoves(playerMove);
                     }
-                    if (isMoveValid)
+                    /*if (isMoveValid)
                     {
                         Console.WriteLine("move is in all possible - check for legal moves");
                         isMoveValid = Array.IndexOf(LegalMoves, playerMove.ToString()) != -1;
-                    }
+                    }*/
                 }             
-                // testing the input for valid input - rulewise
-                // add validation that the move doesnt leave a player in check
 
                 // executing the input
                 ExecuteMove(board, playerMove, state);
@@ -99,7 +98,7 @@ namespace Console_Chess.Tests
                 // change the turn player and incrementing turn count:
                 state.UpdateGameState(board);
                 TurnPlayer = state.GetPlayer();
-                TurnCount++;
+                TurnCount = state.GetTurnCount();
             };
             Console.WriteLine("GAME OVER BY " + state.GetResult());
         }
