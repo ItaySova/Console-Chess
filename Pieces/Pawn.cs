@@ -45,7 +45,7 @@ namespace Console_Chess.Pieces
                 MoveList += PiecePosition.ToString() + singleForwardStep.ToString() + ",";
             }
             Position twoStepPosition = Direction.PositionAfterStepInDirection(singleForwardStep, Forward);
-            if (!HasMoved && Board.IsPositionInBoard(twoStepPosition)  && board.GetPositionPiece(twoStepPosition) == null)
+            if (!HasMoved && Board.IsPositionInBoard(twoStepPosition)  && board.GetPositionPiece(singleForwardStep) == null &&  board.GetPositionPiece(twoStepPosition) == null)
             {
                 MoveList += PiecePosition.ToString() + twoStepPosition.ToString() + ",";
             }
