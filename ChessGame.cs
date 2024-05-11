@@ -364,6 +364,10 @@ namespace Console_Chess
             Move PlayerMove = null;
             while (!isValid)
             {
+                if(input == "RESIGN")
+                {
+                    return null;
+                }
                 if (ValidateInput(input))
                 {
                     PlayerMove = Move.ConvertStringToMove(input);
