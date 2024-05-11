@@ -44,6 +44,8 @@ namespace Console_Chess.Tests
 
         public override void Play()
         {
+            // for debugging purposes 
+            string MovesLog = "";
             Console.WriteLine("playing from new logic design");
             GameState state = new GameState();
             DisplayRules();
@@ -77,7 +79,7 @@ namespace Console_Chess.Tests
                 /*string[] LegalMoves = state.GetLegalMoves(board, MovesAvailable);
                 Console.WriteLine("is legal == possible " + IsLegalMovesEqualPossible(state.GetMovesList(), LegalMoves));
                 Console.WriteLine(LegalMoves.Length + " legal moves available");*/
-
+                
                 bool isMoveValid = false;
                 Move playerMove = null;
                 // taking user input
@@ -103,7 +105,7 @@ namespace Console_Chess.Tests
                 {
                     continue;
                 }
-
+                MovesLog += playerMove.ToString() + ",";
                 // executing the input
                 ExecuteMove(board, playerMove, state);
 
@@ -115,10 +117,11 @@ namespace Console_Chess.Tests
             board.Print();
             string res = state.GetResult();
             Console.WriteLine("GAME OVER BY " + res);
-            if (res == "CHECKMATE")
+            if (res == "CHECKMATE" || res == "RESIGN")
             {
                 Console.WriteLine("the {0} player won!", (TurnPlayer?"black":"white"));
             }
+            Console.WriteLine("movesLog is: " + MovesLog);
         }
 
         private bool IsLegalMovesEqualPossible(string[] possibleMoves, string[] legalMoves)
