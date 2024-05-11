@@ -57,10 +57,10 @@ namespace Console_Chess.Tests
             board.AddPiece(new King(false, new Position(0, 4)));
             board.AddPiece(new King(true, new Position(7, 4)));
             // add relevant pawns
-            board.AddPiece(new Pawn(false, new Position(4, 4)));
-            board.AddPiece(new Pawn(false, new Position(4, 5)));
-            board.AddPiece(new Pawn(true, new Position(3, 0)));
-            board.AddPiece(new Pawn(true, new Position(3, 1)));
+            board.AddPiece(new Pawn(false, new Position(5, 6)));
+            board.AddPiece(new Pawn(false, new Position(6, 7)));
+            board.AddPiece(new Pawn(true, new Position(2, 0)));
+            board.AddPiece(new Pawn(true, new Position(2, 1)));
             ChessGame game = new ChessGame(board);
             game.Play();
         }
