@@ -150,5 +150,40 @@ namespace Console_Chess.Tests
             return true;
         }
 
+        public override Move UserInput() // virtual for tests
+        {
+            bool isValid = false;
+            string input = "";
+            Move PlayerMove = null;
+            while (!isValid)
+            {
+                Console.WriteLine("what will be your move, " + (TurnPlayer ? "white" : "black"));
+                input = Console.ReadLine();
+                if (input == "RESIGN")
+                {
+                    return null;
+                }
+                if(input == "RULES")
+                {
+                    DisplayRules();
+                    continue;
+                }
+
+                if (ValidateInput(input))
+                {
+                    // if the input is valid - convert to move and proceed
+                    PlayerMove = ConvertInputToMove(input);
+                    Position FromPos = PlayerMove.GetFromPos();
+                    Piece Chosen = board.GetPositionPiece(FromPos);
+                    // validation for choosing a piece which belong to turns player and not an empty square
+                    isValid = Chosen != null && IsPieceBelongToPlayer(Chosen);
+                }
+                // massage for invalid move - 
+                if (!isValid)
+                    Console.WriteLine("failed input validation check - either the from spot is empty or contains enemt piece:");
+            }
+            return PlayerMove;
+        }
+
     }
 }
