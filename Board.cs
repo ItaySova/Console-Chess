@@ -65,7 +65,7 @@ namespace Console_Chess
                         Console.Write("|  |");
                     }                    
                 }
-                Console.WriteLine();
+                Console.WriteLine("\n   __  __  __  __  __  __  __  __ ");
             }
         }
         // override print with string of moves.
