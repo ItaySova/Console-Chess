@@ -21,7 +21,8 @@ namespace Console_Chess.Tests
             string[] inputsForQuickCheckmate = { "e2e4", "f7f5", "d2d3", "g7g5", "d1h5"};
             string[] inputsForQuickBlackCheckMate = { "F2F4", "E7E5","G2G4","D8H4", "F4F5"};
             string[] EnPassantInputs = { "b2b4","g7g5","b2b4","a7a5"}; // Todo continue later
-            string[] CastlingInputs = { };
+            string[] StalemateInputs = { "c2c4", "h7h5", "h2h4", "a7a5", "d1a4", "a8a6", "a4a5", "a6h6", "a5c7", "f7f6",
+                "c7d7", "e8f7", "d7b7", "d8d3", "b7b8", "d3h7", "b8c8", "f7g6", "c8e6" };
             string[] ThreeFoldInput = { "g1h3", "g8h6", "h3g1", "h6g8", "g1h3", "g8h6", "h3g1", "h6g8", "g1h3", "g8h6" };
             string[] ThreeFoldIncorrect = { "g1h3", "g8h6", "h1g1", "h6g8", "g1h1", "g8h6", "h3g1", "h6g8",
              "g1h3", "g8h6", "h3g1", "h6g8",
@@ -67,8 +68,8 @@ namespace Console_Chess.Tests
                     inputsOfChoice = EnPassantInputs;
                     break;
                 case "5":
-                    Console.WriteLine("running castling simulation");
-                    inputsOfChoice = CastlingInputs;
+                    Console.WriteLine("running stalemate simulation");
+                    inputsOfChoice = StalemateInputs;
                     break;
                 case "6":
                     Console.WriteLine("Pawm promotion simulation");
@@ -111,6 +112,12 @@ namespace Console_Chess.Tests
             bool SkipNext3Turns = GameSimulations.SkipNext3Turns();
             while (!state.GetGameOver())
             {
+                if (moveCounter == InputMoves.Length)
+                {
+                    Console.WriteLine("input ended");
+                    break;
+                }
+
                 string[] MovesAvailable = state.GetAllPossibleMoves(board);
                 // printing
                 board.Print();
@@ -156,11 +163,7 @@ namespace Console_Chess.Tests
                 //TurnPlayer = !TurnPlayer;
                 TurnCount++;
                 moveCounter++;
-                if(moveCounter == InputMoves.Length)
-                {
-                    Console.WriteLine("input ended");
-                    break;
-                }
+                
             }
             board.Print();
             Console.WriteLine("GAME OVER BY " + state.GetResult());
