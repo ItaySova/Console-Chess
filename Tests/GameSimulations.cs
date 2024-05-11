@@ -109,6 +109,7 @@ namespace Console_Chess.Tests
         {
             GameState state = new GameState();
             int moveCounter = 0;
+            state.UpdateMoveslist(board);
             bool SkipNext3Turns = GameSimulations.SkipNext3Turns();
             while (!state.GetGameOver())
             {
@@ -118,18 +119,17 @@ namespace Console_Chess.Tests
                     break;
                 }
 
-                string[] MovesAvailable = state.GetAllPossibleMoves(board);
                 // printing
                 board.Print();
                 Console.WriteLine(state.GetCheckStatus() ? "CHECK" : "");
-                string[] LegalMoves = state.GetLegalMoves(board, MovesAvailable);
+
                 bool isMoveValid = false;
                 Move playerMove = null;
 
                 if (SkipNext3Turns)
                 {
                     Console.WriteLine("execute move number {0}: {1}", moveCounter, InputMoves[moveCounter]);
-                    SkipNext3Turns = !(moveCounter == 72); // for testing purposes skip to the last time the board was correct
+                    SkipNext3Turns = !(moveCounter == 6); // for testing purposes skip to the last time the board was correct
                 }
                 else
                 {
@@ -141,27 +141,32 @@ namespace Console_Chess.Tests
                 while (!isMoveValid)
                 {
                     playerMove = ValidateAutomationInput(InputMoves[moveCounter]);
-                    isMoveValid = Array.IndexOf(MovesAvailable, playerMove.ToString()) != -1;
+                    if (playerMove == null)
+                    {
+                        // means player resigned
+                        state.UpdateGameOver("RESIGN");
+                        break;
+                    }
+                    isMoveValid = Array.IndexOf(state.GetMovesList(), playerMove.ToString()) != -1;
                     if (!isMoveValid)
                     {
                         Console.WriteLine("move {0} is not valid - try again", playerMove.ToString());
                         Console.ReadLine();
                     }
-                    if (isMoveValid)
-                    {
-                        Console.WriteLine("move is in all possible - check for legal moves");
-                        isMoveValid = Array.IndexOf(LegalMoves, playerMove.ToString()) != -1;
-                    }
                 }
-                
-                
+
+                if (playerMove == null)
+                {
+                    continue;
+                }
+
                 ExecuteMove(board, playerMove, state);
 
                 // change the turn player and incrementing turn count:
                 state.UpdateGameState(board);
                 TurnPlayer = state.GetPlayer();
                 //TurnPlayer = !TurnPlayer;
-                TurnCount++;
+                TurnCount = state.GetTurnCount();
                 moveCounter++;
                 
             }
