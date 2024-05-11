@@ -20,6 +20,7 @@ namespace Console_Chess.Tests
             string[] inputs = { "e2e4", "f7f5", "b1c3", "b8c6" ,"d1h5","g7g6","h5f5","g6f5"};
             string[] inputsForQuickCheckmate = { "e2e4", "f7f5", "d2d3", "g7g5", "d1h5"};
             string[] inputsForQuickBlackCheckMate = { "F2F4", "E7E5","G2G4","D8H4", "F4F5"};
+            string[] PawnPromotionInputs = { "RESIGN"};
             string[] EnPassantInputs = { "b2b4","g7g5","b2b4","a7a5"}; // Todo continue later
             string[] StalemateInputs = { "c2c4", "h7h5", "h2h4", "a7a5", "d1a4", "a8a6", "a4a5", "a6h6", "a5c7", "f7f6",
                 "c7d7", "e8f7", "d7b7", "d8d3", "b7b8", "d3h7", "b8c8", "f7g6", "c8e6" };
@@ -46,7 +47,7 @@ namespace Console_Chess.Tests
                 "g1h1", "e8g8" /*castling*/, "d1e2", "a6a5", "c1e3", "b6c7", "c3b5", "c7b8", "c2c3", "d6d5" /*move number 18*/,"e4e5","f6e4", "d3e4",
                 "d5e4", "b3c5", "e7c5", "e3c5", "c8a6", "c3c4", "f8d8", "b5d6","f7f5", "e5f6" /*en passant capture*/,"d8d6", "e2e4", "a6b7",
                 "c5d6", "b8d6", "a1d1", "c6d8", "f6f7" /*check*/, "g8f7", "e4h7", "d6c6", "f1f2", "c6e4", "f4f5","e6e5","f2d2", "b7c6" ,
-                "h7g6" /*check*/,"f7e7", "d2d7"};
+                "h7g6" /*check*/,"f7e7", "d2d7", "RESIGN"};
                 
             string[] inputsOfChoice = null;
             switch (option)
@@ -73,6 +74,7 @@ namespace Console_Chess.Tests
                     break;
                 case "6":
                     Console.WriteLine("Pawm promotion simulation");
+                    inputsOfChoice = PawnPromotionInputs;
                     break;
                 case "7":
                     Console.WriteLine("running ThreeFoldInput simulation");
