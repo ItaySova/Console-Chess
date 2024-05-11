@@ -37,17 +37,15 @@ namespace Console_Chess
             // remove later - log of moves for repeating in tests:
             string movesLog = "";
             GameState state = new GameState();
+            DisplayRules();
             state.UpdateMoveslist(board);
             while (!state.GetGameOver())
             {
-                string[] MovesAvailable = state.GetAllPossibleMoves(board);
                 // printing
                 board.Print();
                 Console.WriteLine(state.GetCheckStatus() ? "CHECK" : "");
-                string[] LegalMoves = state.GetLegalMoves(board, MovesAvailable);
-                // check if the moves int the gamestate is identical to the legal moves done manually"
-                Console.WriteLine("manuall legal moves == state.getMoves: " + (state.GetMovesList().ToString() == LegalMoves.ToString()));
-                Console.WriteLine("turn number: " + state.GetTurnCount());
+                // check if the moves int the gamestate is identical to the legal moves done manually"                
+
                 bool isMoveValid = false;
                 Move playerMove = null;
                 // taking user input
@@ -61,17 +59,11 @@ namespace Console_Chess
                         break;
                     }
 
-                    isMoveValid = Array.IndexOf(MovesAvailable, playerMove.ToString()) != -1;
+                    isMoveValid = Array.IndexOf(state.GetMovesList(), playerMove.ToString()) != -1;
                     if (!isMoveValid)
                     {
-                        Console.WriteLine("move is not valid - try again");
-                        isMoveValid = IsMoveInAllPlayerMoves(playerMove);
-                    }
-                    if (isMoveValid)
-                    {
-                        Console.WriteLine("move is in all possible - check for legal moves");
-                        isMoveValid = Array.IndexOf(LegalMoves, playerMove.ToString()) != -1;
-                    }
+                        Console.WriteLine("move is not valid - try again");                        
+                    }                    
                 }
                 if(playerMove == null)
                 {
@@ -86,7 +78,7 @@ namespace Console_Chess
                 state.UpdateGameState(board);
                 TurnPlayer = state.GetPlayer();
                 //TurnPlayer = !TurnPlayer;
-                TurnCount++;
+                TurnCount = state.GetTurnCount();
             }
             Console.WriteLine("GAME OVER BY " + state.GetResult());
             Console.WriteLine("moves log:\n" + movesLog);
