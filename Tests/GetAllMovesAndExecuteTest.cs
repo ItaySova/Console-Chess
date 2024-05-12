@@ -80,35 +80,6 @@ namespace Console_Chess.Tests
             }
         }
 
-        // simulate game with only valid moves from input regard
-        public void GameSimulation(string[] InputMoves)
-        {
-            Console.WriteLine("playing from moves test!");
-            Board testBoard = GetBoard();
-            bool Player = GetTurnPlayer();
-            bool gameOver = false;
-            int moveCounter = 0;
-            while (!gameOver)
-            {
 
-                // printing
-                testBoard.Print();
-
-                // taking user input
-                Move playerMove = ConvertInputToMove(InputMoves[moveCounter]);
-                Console.WriteLine(playerMove.ToString());
-
-                // testing the input for valid input - rulewise
-                Piece[] allPlayerPieces = testBoard.GetAllPiecesForPlayer(Player);
-                bool isMoveValid = IsMoveInAllPlayerMoves(playerMove);
-                Console.WriteLine((isMoveValid ? "valid move" : "invalid move"));
-                // executing the input
-
-                // change the turn player and incrementing turn count:
-                moveCounter ++;
-                Player = !Player;
-                SetTurnPlayer(Player);
-            }
-        }
     }
 }
