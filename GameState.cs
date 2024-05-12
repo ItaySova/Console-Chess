@@ -109,11 +109,7 @@ namespace Console_Chess
         {
             return IsCheck;
         }
-        public bool IsCheckMate(Board board)
-        {
-            // first implement Checkmate game over only!
-            return false;
-        }
+
 
         public void UpdateGameOver(string input)
         {
