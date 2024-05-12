@@ -184,17 +184,7 @@ namespace Console_Chess
             return Array.IndexOf(movesArr, move.ToString()) != -1;
             //return true;
         }
-
-        // get ALL moves for optimisation and debugging purpose
-        // TODO - replace the function with the one in gameState
-        public string[] GetAllPlayerMoves()
-        {
-            Piece[] allPlayerPieces = board.GetAllPiecesForPlayer(TurnPlayer);
-            // get moves for all pieces
-            string allPossibleMoves = board.GetAllMovesForPieces(allPlayerPieces);
-            string[] movesArr = allPossibleMoves.Split(',');
-            return movesArr;
-        }
+        
 
         public virtual void GameSimulation(string[] inputs)
         {
