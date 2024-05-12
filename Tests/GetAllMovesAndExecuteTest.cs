@@ -36,11 +36,6 @@ namespace Console_Chess.Tests
             testGame.Play();
         }
 
-        public static void IsMoveInListAutomation()
-        {
-            ChessGame testGame = new GetAllMovesAndExecuteTest();
-            testGame.Play();
-        }
 
         public override void Play()
         {
