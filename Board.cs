@@ -51,6 +51,7 @@ namespace Console_Chess
         public void Print()
         { //|br||bn||bb||bq||bk||bb||bn||br|
             Console.WriteLine("  | a|| b|| c|| d|| e|| f|| g|| h|");
+            Console.WriteLine("   __  __  __  __  __  __  __  __ ");
             for (int row = 0; row < 8; row++)
             {
                 Console.Write(8 - row + " ");
