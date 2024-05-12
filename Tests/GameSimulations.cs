@@ -184,34 +184,7 @@ namespace Console_Chess.Tests
             board.Print();
             Console.WriteLine("GAME OVER BY " + state.GetResult());
         }
-
         
-        public override Move UserInput()
-        {
-            Board testBoard = GetBoard();
-            bool Player = GetTurnPlayer();
-            bool isValid = false;
-            string input = "";
-            Move PlayerMove = null;
-            while (!isValid)
-            {
-                Console.WriteLine("what will be your move, " + (Player ? "white" : "black"));
-                input = Console.ReadLine();
-                if (ValidateInput(input))
-                {
-                    // if the input is valid - convert to move and proceed
-                    PlayerMove = ConvertInputToMove(input);
-                    Position FromPos = PlayerMove.GetFromPos();
-                    Piece Chosen = testBoard.GetPositionPiece(FromPos);
-                    // validation for choosing a piece which belong to turns player and not an empty square
-                    isValid = Chosen != null && IsPieceBelongToPlayer(Chosen);
-                }
-                // massage for invalid move - 
-                if (!isValid)
-                    Console.WriteLine("failed input validation check - either the from spot is empty or contains enemt piece:");
-            }
-            return PlayerMove;
-        }
 
         public static bool SkipNext3Turns()
         {
