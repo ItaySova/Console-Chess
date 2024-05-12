@@ -39,6 +39,7 @@ namespace Console_Chess
             GameState state = new GameState();
             DisplayRules();
             state.UpdateMoveslist(board);
+            state.UpdateHistory(board);
             while (!state.GetGameOver())
             {
                 // printing
@@ -86,7 +87,7 @@ namespace Console_Chess
             {
                 Console.WriteLine("the {0} player won!", (TurnPlayer?"Black":"White"));
             }
-            Console.WriteLine("moves log:\n" + movesLog);
+            //fConsole.WriteLine("moves log:\n" + movesLog);
         }
         public virtual Move UserInput() // virtual for tests
         {
