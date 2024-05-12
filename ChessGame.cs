@@ -173,7 +173,7 @@ namespace Console_Chess
             return isPieceBelongToPlayer;
         }
 
-        //TODO - refactor 
+        //TODO - refactor - REMOVE FROM THE GetAllMovesAndExecuteTest OR REMOVE CLASS ENTIRELY
         public bool IsMoveInAllPlayerMoves(Move move)
         {
             // helpers - get all pieces for player
