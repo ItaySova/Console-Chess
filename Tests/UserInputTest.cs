@@ -41,7 +41,7 @@ namespace Console_Chess.Tests
                 if (ValidateInput(TestInputs[counter]))
                 {
                     isValid = true; // if the input is valid - convert to move and then check from Move class if it is legal
-                    PlayerMove = ConvertInputToMove(TestInputs[counter]);
+                    PlayerMove = Move.ConvertStringToMove(TestInputs[counter]);
                     // add validation for the move itself - such as if the move is legal for the piece or if it leaves the player in check
                 }
                 // massage for invalid move - 
