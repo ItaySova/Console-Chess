@@ -52,7 +52,7 @@ namespace Console_Chess
                 // taking user input
                 while (!isMoveValid)
                 {
-                    playerMove = UserInput();
+                    playerMove = GetUserInput();
                     if(playerMove == null)
                     {
                         // means player resigned
@@ -89,7 +89,7 @@ namespace Console_Chess
             }
             //fConsole.WriteLine("moves log:\n" + movesLog);
         }
-        public virtual Move UserInput() // virtual for tests
+        public virtual Move GetUserInput() // virtual for tests
         {
             bool isValid = false;
             string input = "";
@@ -146,7 +146,8 @@ namespace Console_Chess
             return CharsValid && NumbersValid;
         }
 
-        public Position ConvertInputToPosition(char letter, char number)
+        // REMOVE AFTER TESTS
+        /*public Position ConvertInputToPosition(char letter, char number)
         {
             // the input already passed validation - letter will be column and number will be row
             string lettersDict = "abcdefgh";
@@ -156,16 +157,17 @@ namespace Console_Chess
 
             Position pos = new Position(row, col);
             return pos;
-        }
+        }*/
 
-        public Move ConvertInputToMove(string input)
+        // REMOVE AFTER TESTS 
+        /*public Move ConvertInputToMove(string input)
         {
             Position fromPos = ConvertInputToPosition(input[0], input[1]);
             Position toPose = ConvertInputToPosition(input[2], input[3]);
 
 
             return new Move(fromPos, toPose);
-        }
+        } */
 
         public bool IsPieceBelongToPlayer(Piece piece)
         {
