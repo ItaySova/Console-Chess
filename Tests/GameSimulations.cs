@@ -20,8 +20,13 @@ namespace Console_Chess.Tests
             string[] inputs = { "e2e4", "f7f5", "b1c3", "b8c6" ,"d1h5","g7g6","h5f5","g6f5"};
             string[] inputsForQuickCheckmate = { "e2e4", "f7f5", "d2d3", "g7g5", "d1h5"};
             string[] inputsForQuickBlackCheckMate = { "F2F4", "E7E5","G2G4","D8H4", "F4F5"};
-            string[] PawnPromotionInputs = { "RESIGN"};
-            string[] EnPassantInputs = { "b2b4","g7g5","b2b4","a7a5"}; // Todo continue later
+            // contains castle queen side, castle king side, en passant in the middle of the board, en passant in coloumn from col g to h
+            // and en passant from a to b
+            string[] PawnPromotionInputs = { "g2g4", "a7a5", "g4g5", "a5a4", "b2b4", "a4b3", "e2e4", "h7h5", "g5h6", "g7h6", "a2b3", "f8g7", "c1a3", "g8f6",
+                "b1c3", "e8g8", "d1e2", "g7h8", "e1c1", "a8a4", "b3b4", "a4a7", "f1h3", "a7a4", "b4b5", "a4a6", "b5a6", "b8c6", "a6a7", "b7b5", "a7a8", "e7e6", "e4e5",
+                "c6a5", "e2e4", "c8a6", "g1e2", "a6c8", "h1g1", "h8g7", "g1g3", "c8a6", "d1g1", "a6c8", "g3g7", "g8h8", "e4h7", "f6h7", "RESIGN" };
+            string[] EnPassantInputs = { "b2b4","g7g5","b2b4","a7a5"}; // contain en passant from h to g, en passant from b to a and en passant to the west and east in the 
+            // middle of the board
             string[] StalemateInputs = { "c2c4", "h7h5", "h2h4", "a7a5", "d1a4", "a8a6", "a4a5", "a6h6", "a5c7", "f7f6",
                 "c7d7", "e8f7", "d7b7", "d8d3", "b7b8", "d3h7", "b8c8", "f7g6", "c8e6" };
             string[] ThreeFoldInput = { "g1h3", "g8h6", "h3g1", "h6g8", "g1h3", "g8h6", "h3g1", "h6g8", "g1h3", "g8h6" };
