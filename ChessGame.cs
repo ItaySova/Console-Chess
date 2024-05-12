@@ -80,6 +80,7 @@ namespace Console_Chess
                 //TurnPlayer = !TurnPlayer;
                 TurnCount = state.GetTurnCount();
             }
+            board.Print();
             Console.WriteLine("GAME OVER BY " + state.GetResult());
             Console.WriteLine("moves log:\n" + movesLog);
         }
