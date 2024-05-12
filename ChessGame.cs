@@ -201,33 +201,6 @@ namespace Console_Chess
             Console.WriteLine("virtual function for tests classes");
         }
 
-        // remove and fix simulation 
-        public bool isPlayerInCheck()
-        {
-            // get all opponent pieces
-            Piece[] allOpponentPieces = board.GetAllPiecesForPlayer(!TurnPlayer);
-            // get the current player king for its stored position 
-            Piece currentPlayerKing = board.FindPlayerKing(TurnPlayer);
-            // check if there is no king return false for tests 
-            if(currentPlayerKing == null)
-            {
-                this.IsGameOver = true;
-                return false;
-            }
-            // check for every enemy piece if at least one can capture the current king
-            foreach (Piece piece in allOpponentPieces)
-            {
-                if(piece == null)
-                {
-                    continue;
-                }
-                if (piece.CanCaptureKing(board, currentPlayerKing))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
         // getters:
         public bool GetTurnPlayer()
         {
