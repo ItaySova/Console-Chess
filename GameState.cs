@@ -150,9 +150,7 @@ namespace Console_Chess
                     Move playerMoveAsMove = Move.ConvertStringToMove(allPlayerMoves[moveCount]);
                     Board copy = board.Copy();
                     GameState stateCopy = this.Copy();
-                    // small test: 
-                    //Console.WriteLine(board.ToString() == copy.ToString());
-                    //NewGameLogicTest.ExecuteMove(copy, playerMoveAsMove);
+
                     ChessGame.ExecuteMove(copy, playerMoveAsMove, stateCopy);
                     bool IsCopyCheck = IsPlayerInCheck(copy); // update 
                     if (IsCopyCheck == false)
