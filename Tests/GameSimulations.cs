@@ -220,11 +220,5 @@ namespace Console_Chess.Tests
             return input == "y" || input == "Y";
         }
 
-        public void changeMoveIfNotInMovesList(string[] inputs, int counter)
-        {
-            string userInput = "";
-            userInput = Console.ReadLine();
-            inputs[counter] = userInput;
-        }
     }
 }
