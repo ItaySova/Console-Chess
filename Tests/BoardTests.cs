@@ -39,7 +39,7 @@ namespace Console_Chess.Tests
                 testBoard.Print();
 
                 // taking user input
-                Move playerMove = UserInput();
+                Move playerMove = GetUserInput();
                 Piece Chosen = testBoard.GetPositionPiece(playerMove.GetFromPos());
                 Console.WriteLine("move is : "+ playerMove.ToString()+ "\n" +
                     "piece chosen: "+ Chosen);
