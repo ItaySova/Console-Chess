@@ -82,6 +82,10 @@ namespace Console_Chess
             }
             board.Print();
             Console.WriteLine("GAME OVER BY " + state.GetResult());
+            if(state.GetResult() == "CHECKMATE")
+            {
+                Console.WriteLine("the {0} player won!", (TurnPlayer?"Black":"White"));
+            }
             Console.WriteLine("moves log:\n" + movesLog);
         }
         public virtual Move UserInput() // virtual for tests
@@ -389,9 +393,9 @@ namespace Console_Chess
         public void DisplayRules()
         {
             Console.WriteLine("hello and welcome to my chess console game!\nhere are the following rules:\n" +
-                "1. at the begining of the turn, the turn player choose a move in the format of 1 letter for the column and a number, representing" +
+                "1. at the begining of the turn, the turn player choose a move in the format of 1 letter for the column and a number,\nrepresenting" +
                 " the piece on the board he choose to make a move with, and then 1 letter and one number for representing the place the piece" +
-                "moves to. for example 'a2a4' or 'e2e4.'" +
+                " moves to. for example 'a2a4' or 'e2e4.'" +
                 "a player must choose its own pieces.\n2. a player can forfeit the match by entering 'RESIGN' instead of his move, resulting" +
                 "in a loss.\n3. if a player want to look againg at those rules - type 'RULES' instead of the move");
         }
