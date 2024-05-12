@@ -144,30 +144,7 @@ namespace Console_Chess
             bool CharsValid = ValidChars.Contains(input[0] + "") && ValidChars.Contains(input[2] + "");
             bool NumbersValid = ValidNumbers.Contains(input[1] + "") && ValidNumbers.Contains(input[3] + "");
             return CharsValid && NumbersValid;
-        }
-
-        // REMOVE AFTER TESTS
-        /*public Position ConvertInputToPosition(char letter, char number)
-        {
-            // the input already passed validation - letter will be column and number will be row
-            string lettersDict = "abcdefgh";
-            string numbersDict = "87654321";
-            int col = lettersDict.IndexOf((letter+ "").ToLower());
-            int row = numbersDict.IndexOf(number);
-
-            Position pos = new Position(row, col);
-            return pos;
-        }*/
-
-        // REMOVE AFTER TESTS 
-        /*public Move ConvertInputToMove(string input)
-        {
-            Position fromPos = ConvertInputToPosition(input[0], input[1]);
-            Position toPose = ConvertInputToPosition(input[2], input[3]);
-
-
-            return new Move(fromPos, toPose);
-        } */
+        }        
 
         public bool IsPieceBelongToPlayer(Piece piece)
         {
