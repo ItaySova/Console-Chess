@@ -232,8 +232,7 @@ namespace Console_Chess
         }
 
         private static void SetCastlingRook(Board board, Move move)
-        {
-            Move rookMove;
+        {            
             Position toPosition = null;
             Position rookOriginalPos = null;
             int MoveRow = move.GetFromPos().GetRow();
@@ -248,9 +247,7 @@ namespace Console_Chess
                 // rook does a1d1 or rook does a8d8 (column a-> d or 0 -> 3
                 toPosition = new Position(MoveRow, 3);
                 rookOriginalPos = new Position(MoveRow, 0);
-            }
-
-            rookMove = new Move(rookOriginalPos, toPosition);
+            }            
             // remove the rook from its position and place it instead in its place
             Piece rookCopy = board.RemovePiece(rookOriginalPos);
             rookCopy.SetPiecePosition(toPosition);
