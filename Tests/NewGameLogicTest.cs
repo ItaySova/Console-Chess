@@ -85,7 +85,7 @@ namespace Console_Chess.Tests
                 // taking user input
                 while (!isMoveValid)
                 {
-                    playerMove = UserInput();
+                    playerMove = GetUserInput();
 
                     if (playerMove == null)
                     {
@@ -141,7 +141,7 @@ namespace Console_Chess.Tests
             return true;
         }
 
-        public override Move UserInput() // virtual for tests
+        public override Move GetUserInput() // virtual for tests
         {
             bool isValid = false;
             string input = "";
@@ -163,7 +163,7 @@ namespace Console_Chess.Tests
                 if (ValidateInput(input))
                 {
                     // if the input is valid - convert to move and proceed
-                    PlayerMove = ConvertInputToMove(input);
+                    PlayerMove = Move.ConvertStringToMove(input);
                     Position FromPos = PlayerMove.GetFromPos();
                     Piece Chosen = board.GetPositionPiece(FromPos);
                     // validation for choosing a piece which belong to turns player and not an empty square
